@@ -1050,3 +1050,13 @@ section {
     display: flex !important;
   }
 }
+
+/* More hero top padding on mobile */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 100px !important;
+  }
+  .hero-logo {
+    margin-top: 1rem;
+  }
+}
