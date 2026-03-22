@@ -1068,3 +1068,17 @@ section {
 section {
   scroll-margin-top: 70px;
 }
+
+/* Fix avatar clipping */
+.hero .container {
+  overflow: visible !important;
+}
+.hero-logo {
+  overflow: visible !important;
+  object-fit: contain !important;
+}
+@media (max-width: 768px) {
+  .hero {
+    overflow: visible !important;
+  }
+}
