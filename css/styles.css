@@ -88,7 +88,7 @@ a.btn-secondary:hover {
 
 /* ── NAV ── */
 .nav {
-  position: sticky;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
@@ -1071,7 +1071,7 @@ html, body {
     right: 0;
   }
   .hero {
-    padding-top: 0.5rem !important;
+    padding-top: 1rem !important;
     text-align: center;
   }
   .hero-logo {
