@@ -970,3 +970,42 @@ section {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Fix text overflow on mobile */
+@media (max-width: 768px) {
+  .step, .feature-card, .section, .container {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+  .step {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .step h3 {
+    white-space: normal;
+    overflow: visible;
+  }
+  .step p, .feature-card p, .section-subtitle {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+  code {
+    font-size: 0.65rem !important;
+    word-break: break-all;
+  }
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
+  }
+  .steps {
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
