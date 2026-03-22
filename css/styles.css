@@ -1119,3 +1119,26 @@ html, body {
 section {
   scroll-margin-top: 70px;
 }
+
+/* Balanced steps in landscape/desktop */
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+.step {
+  flex: 1 1 200px;
+  max-width: 280px;
+  min-width: 180px;
+}
+@media (max-width: 768px) {
+  .steps {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .step {
+    max-width: 100%;
+    min-width: auto;
+  }
+}
