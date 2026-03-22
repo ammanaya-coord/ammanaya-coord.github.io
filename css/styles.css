@@ -47,7 +47,7 @@ body {
 /* Noise texture overlay */
 body::before {
   content: '';
-  position: sticky;
+  position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
@@ -88,7 +88,7 @@ a.btn-secondary:hover {
 
 /* ── NAV ── */
 .nav {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -1012,7 +1012,7 @@ section {
 
 /* Nav always sticky */
 .nav {
-  position: sticky !important;
+  position: fixed !important;
   top: 0;
   left: 0;
   right: 0;
@@ -1137,4 +1137,9 @@ section {
     max-width: 100%;
     min-width: auto;
   }
+}
+
+/* Compensate for fixed nav */
+body {
+  padding-top: 56px;
 }
