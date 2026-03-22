@@ -195,11 +195,11 @@ a.btn-secondary:hover {
   text-align: center;
   padding: 6rem 1.5rem 4rem;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero::before {
-  content: '';
+  content: none;
   position: absolute;
   top: -20%;
   left: 50%;
@@ -211,7 +211,7 @@ a.btn-secondary:hover {
 }
 
 .hero::after {
-  content: '';
+  content: none;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -354,7 +354,7 @@ section {
   padding: 2rem;
   transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .feature-card::before {
@@ -474,7 +474,7 @@ section {
   margin: 0 auto;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .connect-box::before {
@@ -706,7 +706,7 @@ section {
   gap: 1rem;
   transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .community-card::before {
@@ -1006,7 +1006,7 @@ section {
   }
   .steps {
     max-width: 100%;
-    overflow: hidden;
+    overflow: visible;
   }
 }
 
