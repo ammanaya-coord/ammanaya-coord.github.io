@@ -907,3 +907,66 @@ section {
     padding: 1.5rem;
   }
 }
+
+/* Mobile responsive fixes for steps */
+@media (max-width: 768px) {
+  .steps {
+    padding: 0 0.5rem;
+  }
+  .step {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1rem;
+  }
+  .step h3 {
+    font-size: 1.1rem;
+  }
+  .step p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .step-number {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+    min-width: 36px;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .section-subtitle {
+    font-size: 0.95rem;
+    padding: 0 0.5rem;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 0 0.5rem;
+  }
+  .feature-card {
+    padding: 1.25rem;
+  }
+  .hero-logo {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .tagline {
+    font-size: 1.1rem;
+  }
+  .btn-group {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .connect-box code {
+    font-size: 0.7rem !important;
+  }
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
