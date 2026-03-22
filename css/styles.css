@@ -169,7 +169,7 @@ a.btn-secondary:hover {
 }
 
 .nav-toggle {
-  display: none;
+  display: none; /* hidden on desktop, shown on mobile via media query below */
   background: none;
   border: none;
   cursor: pointer;
@@ -1046,90 +1046,47 @@ section {
   .nav-links li a {
     font-size: 1.1rem;
   }
-  .nav-toggle {
-    display: flex !important;
-  }
-}
 
-/* More hero top padding on mobile */
+/* Mobile responsive fixes */
 @media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100%;
+  }
+  body {
+    overflow-x: hidden;
+  }
+  .step, .feature-card {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .step p, .feature-card p {
+    white-space: normal;
+  }
+  code {
+    font-size: 0.65rem !important;
+    word-break: break-all;
+  }
   .hero {
     padding-top: 100px !important;
+    overflow: visible !important;
   }
-  .hero-logo {
-    margin-top: 1rem;
+  .features-grid {
+    grid-template-columns: 1fr;
   }
-}
-
-/* Ensure hero content scrolls behind fixed nav cleanly */
-.hero {
-  scroll-margin-top: 80px;
+  .btn-group {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
 }
 section {
   scroll-margin-top: 70px;
-}
-
-/* Fix avatar clipping */
-.hero .container {
-  overflow: visible !important;
-}
-.hero-logo {
-  overflow: visible !important;
-  object-fit: contain !important;
-}
-@media (max-width: 768px) {
-  .hero {
-    overflow: visible !important;
-  }
-}
-
-/* Hamburger 3 lines */
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-}
-.nav-toggle span {
-  display: block;
-  width: 24px;
-  height: 3px;
-  background: #fff;
-  border-radius: 2px;
-  transition: 0.3s;
-}
-@media (max-width: 768px) {
-  .nav-toggle {
-    display: flex !important;
-  }
-}
-
-/* Force hamburger visible on mobile */
-@media (max-width: 768px) {
-  .nav-toggle {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 5px !important;
-    background: none !important;
-    border: none !important;
-    cursor: pointer !important;
-    padding: 8px !important;
-    z-index: 9999 !important;
-  }
-  .nav-toggle span {
-    display: block !important;
-    width: 24px !important;
-    height: 3px !important;
-    background: #fff !important;
-    border-radius: 2px !important;
-  }
-  .nav-links {
-    display: none !important;
-  }
-  .nav-links.active {
-    display: flex !important;
-  }
 }
