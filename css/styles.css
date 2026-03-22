@@ -1106,3 +1106,30 @@ section {
     display: flex !important;
   }
 }
+
+/* Force hamburger visible on mobile */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 8px !important;
+    z-index: 9999 !important;
+  }
+  .nav-toggle span {
+    display: block !important;
+    width: 24px !important;
+    height: 3px !important;
+    background: #fff !important;
+    border-radius: 2px !important;
+  }
+  .nav-links {
+    display: none !important;
+  }
+  .nav-links.active {
+    display: flex !important;
+  }
+}
