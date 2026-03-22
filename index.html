@@ -96,7 +96,7 @@
   <section class="section section-alt" id="how-it-works">
     <div class="container">
       <h2 class="section-title">How to Buy Bitcoin</h2>
-      <p class="section-subtitle">5 simple steps to buy BTC privately with no KYC.</p>
+      <p class="section-subtitle">6 simple steps to buy BTC privately with no KYC.</p>
       <div class="steps">
         <div class="step">
           <div class="step-number">1</div>
@@ -111,15 +111,20 @@
         <div class="step">
           <div class="step-number">3</div>
           <h3>Generate Your Robot</h3>
-          <p>A random robot avatar is generated for you. <strong>Save your token!</strong> It's the only way to recover your robot.</p>
+          <p>A random robot avatar is generated for you. <strong>⚠️ Back up your token immediately!</strong> It's the ONLY way to recover your robot. <strong>Never share it with anyone.</strong></p>
         </div>
         <div class="step">
           <div class="step-number">4</div>
+          <h3>Enable Notifications (Optional)</h3>
+          <p>For convenience, enable <strong>Telegram notifications</strong> via @ammanaya_bot from your robot profile. For <strong>maximum privacy</strong>, use only the native in-app notifications — enable them for Ammanaya (or any coordinator you use) in your robot settings.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
           <h3>Create or Take an Order</h3>
           <p><strong>To buy:</strong> Create a BUY order specifying amount in EUR, payment method (Bizum, Revolut, etc.), and premium.<br><strong>Or:</strong> Take an existing SELL order from the book.</p>
         </div>
         <div class="step">
-          <div class="step-number">5</div>
+          <div class="step-number">6</div>
           <h3>Lock Bond → Trade → Receive Sats</h3>
           <p>Pay a small bond (3%) via Lightning. Once matched, send fiat to the seller via the agreed method. When confirmed, sats are released to your wallet instantly.</p>
         </div>
@@ -249,9 +254,9 @@
           <p>If there's a disagreement, open a dispute. The coordinator reviews evidence and resolves fairly.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">📱</div>
-          <h3>Enable Telegram Notifications</h3>
-          <p>Activate notifications via <a href="https://t.me/ammanaya_bot" target="_blank" rel="noopener" style="color:#ff6b35;">@ammanaya_bot</a> to stay updated on your orders.</p>
+          <div class="feature-icon">🔔</div>
+          <h3>Enable Notifications</h3>
+          <p>Enable Telegram notifications via @ammanaya_bot for convenience, or use native in-app notifications for maximum privacy.</p>
         </div>
       </div>
     </div>
@@ -285,16 +290,13 @@
       <h2 class="section-title">Contact</h2>
       <p class="section-subtitle">Reach out through any of these channels.</p>
       <div class="features-grid" style="max-width:600px;margin:0 auto;">
-        <a href="https://t.me/ammanaya_bot" target="_blank" rel="noopener" class="feature-card" style="text-decoration:none;color:inherit;">
-          <div class="feature-icon">📱</div>
-          <h3>Telegram</h3>
-          <p>@ammanaya_bot</p>
-        </a>
-        <a href="https://njump.me/npub1jxpqkr78u5588ft5yzx8kn5m3t5y3m39uhqrhtr9t3zaqcye24yql86vq2" target="_blank" rel="noopener" class="feature-card" style="text-decoration:none;color:inherit;">
+        <div class="feature-card" style="cursor:pointer;" onclick="navigator.clipboard.writeText('npub1jxpqkr78u5588ft5yzx8kn5m3t5y3m39uhqrhtr9t3zaqcye24yql86vq2').then(()=>{this.querySelector('.copy-msg').style.display='block';setTimeout(()=>this.querySelector('.copy-msg').style.display='none',2000)})">
           <div class="feature-icon">🟣</div>
           <h3>Nostr</h3>
-          <p style="font-size:0.75rem;word-break:break-all;">npub1jxpqkr...l86vq2</p>
-        </a>
+          <p style="font-size:0.7rem;word-break:break-all;font-family:'JetBrains Mono',monospace;">npub1jxpqkr78u5588ft5yzx8kn5m3t5y3m39uhqrhtr9t3zaqcye24yql86vq2</p>
+          <p class="copy-msg" style="display:none;color:#ff6b35;font-weight:600;margin-top:0.5rem;">✅ npub copied to clipboard!</p>
+          <p style="opacity:0.5;font-size:0.8rem;">Click to copy</p>
+        </div>
         <a href="mailto:pucot458KK@proton.me" class="feature-card" style="text-decoration:none;color:inherit;">
           <div class="feature-icon">📧</div>
           <h3>Email</h3>
