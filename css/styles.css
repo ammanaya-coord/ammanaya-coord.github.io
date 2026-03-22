@@ -1010,18 +1010,14 @@ section {
   }
 }
 
-/* Fix nav sticky cutting hero logo */
+/* Nav always sticky */
 .nav {
-  position: sticky;
+  position: sticky !important;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(10,10,15,0.95);
-  backdrop-filter: blur(10px);
-}
-.hero {
-  padding-top: 80px;
+  background: rgba(10, 10, 10, 1);
 }
 
 /* Mobile hamburger menu */
