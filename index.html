@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ammanaya - P2P Bitcoin Lightning Coordinator</title>
+  <meta name="description" content="Ammanaya is a privacy-first P2P Bitcoin Lightning coordinator on RoboSats. No KYC, no logs, no compromise. The fire that sets you free.">
+  <link rel="icon" href="ammanaya.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="ammanaya.png" alt="Ammanaya logo" style="width:36px;height:36px;border-radius:50%;">
+        Ammanaya
+      </a>
+      <ul class="nav-links">
+        <li><a href="#what-is">What is it</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#connect">Connect</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <img src="ammanaya.png" alt="Ammanaya" class="hero-logo" style="width:140px;height:140px;border-radius:50%;">
+      <h1><span class="highlight">Ammanaya</span></h1>
+      <p class="tagline">The fire that sets you free ⚡🔥</p>
+      <p style="max-width:600px;margin:0 auto 2rem;opacity:0.85;">P2P Bitcoin Lightning Coordinator on RoboSats</p>
+      <div class="btn-group">
+        <a href="http://ammannjgzybw4qm2odmci7xgolh5grzijidacjxose5tthm375dcopad.onion" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Open in Tor Browser
+        </a>
+        <a href="https://github.com/RoboSats/robosats/issues/2453" target="_blank" rel="noopener" class="btn btn-secondary">
+          Federation Registration
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IS -->
+  <section class="section" id="what-is">
+    <div class="container">
+      <h2 class="section-title">What is Ammanaya?</h2>
+      <p class="section-subtitle">Ammanaya is the ancestral goddess of fire — born to set your sats free. A privacy-first P2P Bitcoin Lightning coordinator committed to financial sovereignty, low fees, and seamless non-KYC trading.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>No KYC</h3>
+          <p>No identity verification required. Trade with total privacy — no personal data, no tracking.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧅</div>
+          <h3>Tor Only</h3>
+          <p>Accessible exclusively through Tor for maximum anonymity. No clearnet, no compromise.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Lightning Fast</h3>
+          <p>Trades settle in minutes via Lightning Network hold invoices. No on-chain waits.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <h3>Non-Custodial</h3>
+          <p>Your keys, your coins. Ammanaya never holds your Bitcoin — trades use hold invoices as escrow.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Low Fees</h3>
+          <p>Only 0.19% total (0.02% maker + 0.17% taker). 50% of fees donated to RoboSats development.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📡</div>
+          <h3>Nostr Relay</h3>
+          <p>Orders are published via Nostr for decentralized discovery. No single point of failure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section-alt" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How to Buy Bitcoin</h2>
+      <p class="section-subtitle">5 simple steps to buy BTC privately with no KYC.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Get a Lightning Wallet</h3>
+          <p>Download Phoenix, Zeus, or Breez wallet. These support hold invoices needed for trading.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Open RoboSats in Tor Browser</h3>
+          <p>Go to <code>ammannjgzybw4qm2odmci7xgolh5grzijidacjxose5tthm375dcopad.onion</code> using <a href="https://www.torproject.org/download/" target="_blank" rel="noopener">Tor Browser</a>.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Generate Your Robot</h3>
+          <p>A random robot avatar is generated for you. <strong>Save your token!</strong> It's the only way to recover your robot.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Create or Take an Order</h3>
+          <p><strong>To buy:</strong> Create a BUY order specifying amount in EUR, payment method (Bizum, Revolut, etc.), and premium.<br><strong>Or:</strong> Take an existing SELL order from the book.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
+          <h3>Lock Bond → Trade → Receive Sats</h3>
+          <p>Pay a small bond (3%) via Lightning. Once matched, send fiat to the seller via the agreed method. When confirmed, sats are released to your wallet instantly.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title" style="margin-top:4rem;">How to Sell Bitcoin</h2>
+      <p class="section-subtitle">Convert your sats to fiat privately.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Open Ammanaya in Tor</h3>
+          <p>Same URL: <code>ammannjgzybw4qm2odmci7xgolh5grzijidacjxose5tthm375dcopad.onion</code></p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Create a SELL Order</h3>
+          <p>Set the amount, currency, payment method you want to receive fiat through, and your premium.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Lock Bond + Escrow</h3>
+          <p>Pay the bond (3%) plus the trade escrow (the sats you're selling) via Lightning hold invoice.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Receive Fiat</h3>
+          <p>The buyer sends fiat via the agreed payment method. Confirm receipt in the trade chat.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
+          <h3>Sats Released to Buyer</h3>
+          <p>Once you confirm fiat received, the escrowed sats are released to the buyer. Your bond is returned. Done!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONNECT -->
+  <section class="section" id="connect">
+    <div class="container">
+      <h2 class="section-title">Connect to Ammanaya</h2>
+      <p class="section-subtitle">Open this address in Tor Browser to start trading.</p>
+      <div class="connect-box" style="background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.2);border-radius:16px;padding:2rem;max-width:700px;margin:2rem auto;text-align:center;">
+        <h3 style="color:#ff6b35;margin-bottom:0.5rem;">🧅 Tor Onion Address</h3>
+        <code style="font-size:0.85rem;word-break:break-all;display:block;padding:1rem;background:rgba(0,0,0,0.3);border-radius:8px;margin:1rem 0;">ammannjgzybw4qm2odmci7xgolh5grzijidacjxose5tthm375dcopad.onion</code>
+        <p style="opacity:0.7;font-size:0.9rem;">Requires <a href="https://www.torproject.org/download/" target="_blank" rel="noopener" style="color:#ff6b35;">Tor Browser</a>. Never use clearnet for trading.</p>
+      </div>
+
+      <div style="max-width:700px;margin:2rem auto;">
+        <h3 style="text-align:center;margin-bottom:1.5rem;">Coordinator Details</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="feature-card">
+            <strong>Min Order</strong>
+            <p>100 sats</p>
+          </div>
+          <div class="feature-card">
+            <strong>Max Order</strong>
+            <p>2,000,000 sats</p>
+          </div>
+          <div class="feature-card">
+            <strong>Maker Fee</strong>
+            <p>0.02%</p>
+          </div>
+          <div class="feature-card">
+            <strong>Taker Fee</strong>
+            <p>0.17%</p>
+          </div>
+          <div class="feature-card">
+            <strong>Bond Size</strong>
+            <p>3% (adjustable by maker)</p>
+          </div>
+          <div class="feature-card">
+            <strong>DevFund</strong>
+            <p>50% donated to RoboSats</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYMENT METHODS -->
+  <section class="section section-alt" id="payments">
+    <div class="container">
+      <h2 class="section-title">Payment Methods</h2>
+      <p class="section-subtitle">Buyers and sellers freely agree on the payment method. These are the most common.</p>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">📱</div><h3>Bizum</h3></div>
+        <div class="feature-card"><div class="feature-icon">🏦</div><h3>Bank Transfer</h3></div>
+        <div class="feature-card"><div class="feature-icon">💳</div><h3>Revolut</h3></div>
+        <div class="feature-card"><div class="feature-icon">🅿️</div><h3>PayPal</h3></div>
+        <div class="feature-card"><div class="feature-icon">🌍</div><h3>Wise</h3></div>
+        <div class="feature-card"><div class="feature-icon">💶</div><h3>N26</h3></div>
+      </div>
+      <p style="text-align:center;opacity:0.7;margin-top:1rem;">Payment methods are agreed between parties. No restrictions.</p>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="section" id="security">
+    <div class="container">
+      <h2 class="section-title">Security & Tips</h2>
+      <p class="section-subtitle">Follow these recommendations to trade safely.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔑</div>
+          <h3>Save Your Robot Token</h3>
+          <p>Your robot token is the ONLY way to recover your identity. Write it down before trading.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Hold Invoices Protect You</h3>
+          <p>Sats are locked in a hold invoice during the trade. They're released only when both parties confirm.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤏</div>
+          <h3>Start Small</h3>
+          <p>Make your first trade with a small amount to get familiar with the process.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚫</div>
+          <h3>No Personal Info</h3>
+          <p>Never share personal information in the trade chat unless strictly needed to complete payment.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚖️</div>
+          <h3>Disputes Are Fair</h3>
+          <p>If there's a disagreement, open a dispute. The coordinator reviews evidence and resolves fairly.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Enable Telegram Notifications</h3>
+          <p>Activate notifications via <a href="https://t.me/ammanaya_bot" target="_blank" rel="noopener" style="color:#ff6b35;">@ammanaya_bot</a> to stay updated on your orders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLICIES -->
+  <section class="section section-alt" id="policies">
+    <div class="container">
+      <h2 class="section-title">Policies</h2>
+      <div style="max-width:700px;margin:0 auto;">
+        <div class="feature-card" style="margin-bottom:1rem;">
+          <h3>🔒 Privacy Policy</h3>
+          <p>In the event of a dispute, users will be asked to provide transaction-related evidence. Personal information should be redacted. Sensitive data is stored only for dispute resolution and permanently deleted afterward.</p>
+        </div>
+        <div class="feature-card" style="margin-bottom:1rem;">
+          <h3>📁 Data Policy</h3>
+          <p>No user data is shared with third parties under any circumstances. Logs are cleared after 7 days unless needed for dispute processing. The coordinator is accessible only through Tor.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📜 Rules</h3>
+          <p>1. Do not share personal information through the chat unless strictly needed for completing the trade.</p>
+          <p>2. Users are solely responsible for complying with their local laws regarding cryptocurrency transactions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-subtitle">Reach out through any of these channels.</p>
+      <div class="features-grid" style="max-width:600px;margin:0 auto;">
+        <a href="https://t.me/ammanaya_bot" target="_blank" rel="noopener" class="feature-card" style="text-decoration:none;color:inherit;">
+          <div class="feature-icon">📱</div>
+          <h3>Telegram</h3>
+          <p>@ammanaya_bot</p>
+        </a>
+        <a href="https://njump.me/npub1jxpqkr78u5588ft5yzx8kn5m3t5y3m39uhqrhtr9t3zaqcye24yql86vq2" target="_blank" rel="noopener" class="feature-card" style="text-decoration:none;color:inherit;">
+          <div class="feature-icon">🟣</div>
+          <h3>Nostr</h3>
+          <p style="font-size:0.75rem;word-break:break-all;">npub1jxpqkr...l86vq2</p>
+        </a>
+        <a href="mailto:pucot458KK@proton.me" class="feature-card" style="text-decoration:none;color:inherit;">
+          <div class="feature-icon">📧</div>
+          <h3>Email</h3>
+          <p>ProtonMail</p>
+        </a>
+        <a href="https://smp1.simplexonflux.com/a#UmzW2iVe6cafc0G24FO-loxValRqfgBVCvXFSn6cypw" target="_blank" rel="noopener" class="feature-card" style="text-decoration:none;color:inherit;">
+          <div class="feature-icon">💬</div>
+          <h3>SimpleX</h3>
+          <p>E2E Encrypted Chat</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding:2rem;text-align:center;opacity:0.5;font-size:0.85rem;">
+    <p>Ammanaya 🔥⚡ — The fire that sets you free</p>
+    <p style="margin-top:0.5rem;">Powered by <a href="https://github.com/RoboSats/robosats" target="_blank" rel="noopener" style="color:#ff6b35;">RoboSats</a></p>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    document.querySelector('.nav-toggle')?.addEventListener('click', () => {
+      document.querySelector('.nav-links')?.classList.toggle('active');
+    });
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+        document.querySelector('.nav-links')?.classList.remove('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
