@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ammanaya - Trading Guides</title>
+  <meta name="description" content="Step-by-step guides for buying and selling Bitcoin on Ammanaya via RoboSats. No KYC, Lightning Network.">
+  <link rel="icon" href="ammanaya.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .guide-nav { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-bottom:3rem; }
+    .guide-nav a {
+      padding:0.8rem 1.5rem; border-radius:50px; font-weight:600; font-size:0.9rem;
+      border:1.5px solid var(--border-color); background:var(--bg-card); color:var(--text-primary);
+      transition: all 0.25s;
+    }
+    .guide-nav a:hover, .guide-nav a.active {
+      border-color:var(--accent-orange); color:var(--accent-orange);
+      background:rgba(247,147,26,0.08); box-shadow:0 0 20px rgba(247,147,26,0.1);
+    }
+    .guide-section { display:none; }
+    .guide-section.active { display:block; }
+    .guide-step {
+      display:flex; gap:1.5rem; margin-bottom:2rem; align-items:flex-start;
+    }
+    .guide-step-num {
+      flex-shrink:0; width:48px; height:48px; border-radius:50%;
+      background:var(--bg-card); border:2px solid var(--accent-orange);
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-display); font-weight:700; font-size:1.2rem;
+      color:var(--accent-orange); box-shadow:0 0 15px rgba(247,147,26,0.15);
+    }
+    .guide-step-content { flex:1; }
+    .guide-step-content h3 {
+      font-family:var(--font-display); font-size:1.1rem; font-weight:600;
+      margin-bottom:0.5rem;
+    }
+    .guide-step-content p {
+      color:var(--text-secondary); font-size:0.95rem; line-height:1.7;
+    }
+    .guide-step-content .tip {
+      margin-top:0.75rem; padding:0.75rem 1rem; border-radius:10px;
+      background:rgba(247,147,26,0.06); border-left:3px solid var(--accent-orange);
+      font-size:0.88rem; color:var(--text-secondary);
+    }
+    .guide-step-content .warning {
+      margin-top:0.75rem; padding:0.75rem 1rem; border-radius:10px;
+      background:rgba(217,79,79,0.06); border-left:3px solid var(--accent-red);
+      font-size:0.88rem; color:var(--text-secondary);
+    }
+    .guide-header { text-align:center; margin-bottom:2.5rem; }
+    .guide-header .badge {
+      display:inline-block; padding:0.3rem 1rem; border-radius:50px;
+      font-size:0.8rem; font-weight:600; margin-bottom:1rem;
+    }
+    .badge-buy { background:rgba(34,197,94,0.12); color:#34d058; border:1px solid rgba(34,197,94,0.2); }
+    .badge-sell { background:rgba(239,68,68,0.12); color:#f87171; border:1px solid rgba(239,68,68,0.2); }
+    .guide-img-placeholder {
+      margin:1rem 0; border-radius:12px; overflow:hidden;
+      border:1px solid var(--border-color); background:var(--bg-card);
+      text-align:center; padding:2rem; color:var(--text-secondary); font-size:0.85rem;
+    }
+    .guide-img-placeholder img {
+      max-width:100%; border-radius:8px;
+    }
+    .guide-flow {
+      display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center;
+      margin:1.5rem 0; padding:1rem; background:var(--bg-card);
+      border-radius:12px; border:1px solid var(--border-color);
+    }
+    .guide-flow span {
+      padding:0.4rem 0.8rem; border-radius:8px; font-size:0.8rem; font-weight:600;
+      background:rgba(247,147,26,0.08); color:var(--accent-orange);
+    }
+    .guide-flow .arrow { background:none; color:var(--text-secondary); }
+    @media (max-width:768px) {
+      .guide-step { flex-direction:column; align-items:center; text-align:center; }
+      .guide-nav a { font-size:0.8rem; padding:0.6rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="ammanaya.png" alt="Ammanaya logo" style="width:36px;height:36px;border-radius:50%;">
+        Ammanaya
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="guides.html" class="active">Guides</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" style="min-height:auto;padding:6rem 1.5rem 2rem;">
+    <div class="container">
+      <h1><span class="highlight">Trading Guides</span></h1>
+      <p class="tagline">Step-by-step instructions for every scenario</p>
+    </div>
+  </section>
+
+  <!-- GUIDE NAV -->
+  <section class="section" style="padding-top:2rem;">
+    <div class="container">
+      <div class="guide-nav">
+        <a href="#" data-guide="create-buy" class="active">🛒 Create a Buy Order</a>
+        <a href="#" data-guide="take-sell">📥 Take a Sell Order</a>
+        <a href="#" data-guide="create-sell">💰 Create a Sell Order</a>
+        <a href="#" data-guide="take-buy">📤 Take a Buy Order</a>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- GUIDE 1: CREATE A BUY ORDER (Maker/Buyer)  -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="guide-section active" id="guide-create-buy">
+        <div class="guide-header">
+          <div class="badge badge-buy">BUYER · MAKER</div>
+          <h2 class="section-title">I want to buy Bitcoin</h2>
+          <p class="section-subtitle">You create the order, set the terms, and wait for a seller to take it.</p>
+        </div>
+
+        <div class="guide-flow">
+          <span>Open Tor</span><span class="arrow">→</span>
+          <span>Generate Robot</span><span class="arrow">→</span>
+          <span>Create Order</span><span class="arrow">→</span>
+          <span>Lock Bond</span><span class="arrow">→</span>
+          <span>Wait for Taker</span><span class="arrow">→</span>
+          <span>Send Fiat</span><span class="arrow">→</span>
+          <span>Receive Sats ⚡</span>
+        </div>
+
+        <div style="max-width:700px;margin:0 auto;">
+
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <div class="guide-step-content">
+              <h3>Open RoboSats via Tor</h3>
+              <p>Open <a href="https://www.torproject.org/download/" target="_blank">Tor Browser</a> and navigate to the Ammanaya onion address:</p>
+              <p><code style="font-size:0.8rem;word-break:break-all;">ammannjgzybw4qm2odmci7xgolh5grzijidacjxose5tthm375dcopad.onion</code></p>
+              <div class="tip">💡 Bookmark the address for quick access. Never use clearnet.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <div class="guide-step-content">
+              <h3>Generate Your Robot</h3>
+              <p>A random robot identity is automatically generated for you. You'll see a unique robot avatar and name.</p>
+              <div class="warning">⚠️ <strong>Save your robot token immediately!</strong> It's the ONLY way to recover your identity. Write it down or copy it to a safe place. If you lose it, your robot is gone forever.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <div class="guide-step-content">
+              <h3>Create a BUY Order</h3>
+              <p>Click <strong>"Create"</strong> and configure your order:</p>
+              <p>• <strong>Type:</strong> Buy<br>
+                 • <strong>Amount:</strong> How much fiat you want to spend (e.g. 50 EUR)<br>
+                 • <strong>Currency:</strong> Your fiat currency (EUR, USD, etc.)<br>
+                 • <strong>Payment method:</strong> How you'll send fiat (Bizum, Revolut, bank transfer, etc.)<br>
+                 • <strong>Premium:</strong> % above/below market price you're willing to pay. 0% = market price. Positive = you pay more (fills faster). Negative = you pay less (takes longer).</p>
+              <div class="tip">💡 A small positive premium (1-3%) makes your order more attractive to sellers and fills faster.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <div class="guide-step-content">
+              <h3>Lock Your Fidelity Bond</h3>
+              <p>RoboSats generates a Lightning <strong>hold invoice</strong> for your fidelity bond (default: 3% of the trade amount). Pay it with your Lightning wallet.</p>
+              <p>The bond is <strong>not spent</strong> — it's locked temporarily and returned to you after the trade completes successfully. It only gets forfeited if you cheat or abandon the trade.</p>
+              <div class="tip">💡 Use a wallet that supports hold invoices: <strong>Phoenix, Zeus, Blixt, Electrum, Alby</strong>. Check <a href="https://learn.robosats.org/docs/wallets/" target="_blank" style="color:var(--accent-orange);">wallet compatibility</a>.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">5</div>
+            <div class="guide-step-content">
+              <h3>Wait for a Seller</h3>
+              <p>Your order is now <strong>live in the order book</strong>. A seller will see it and can take it. This may take minutes or hours depending on your premium and the market.</p>
+              <p>You can enable <strong>notifications</strong> via Telegram (@ammanaya_bot) or use in-app notifications so you don't have to keep the page open.</p>
+              <div class="tip">💡 You can cancel the order at any time before someone takes it — your bond is returned.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">6</div>
+            <div class="guide-step-content">
+              <h3>Seller Takes Your Order</h3>
+              <p>When a seller takes your order, they lock their bond AND the trade escrow (the sats you're buying). Both sides are now committed.</p>
+              <p>You'll see a <strong>trade chat</strong> where you can communicate with the seller.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">7</div>
+            <div class="guide-step-content">
+              <h3>Submit Your Payout Invoice</h3>
+              <p>Provide a Lightning invoice from your wallet for the amount of sats you're buying. This is where you'll receive the Bitcoin once the trade completes.</p>
+              <div class="warning">⚠️ Make sure the invoice hasn't expired and has enough capacity in your wallet to receive.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">8</div>
+            <div class="guide-step-content">
+              <h3>Send Fiat Payment</h3>
+              <p>Send the agreed fiat amount to the seller via the payment method you specified (Bizum, Revolut, bank transfer, etc.). Follow any instructions the seller provides in the chat.</p>
+              <p>Once sent, click <strong>"Confirm fiat sent"</strong> in the trade interface.</p>
+              <div class="warning">⚠️ Only send fiat to the details provided in the RoboSats chat. Never communicate outside the platform.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">9</div>
+            <div class="guide-step-content">
+              <h3>Receive Your Sats ⚡</h3>
+              <p>The seller confirms they received your fiat payment. The escrowed sats are <strong>instantly released</strong> to your Lightning invoice. Your bond is returned.</p>
+              <p><strong>🎉 Done!</strong> You just bought Bitcoin privately with no KYC.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- GUIDE 2: TAKE A SELL ORDER (Taker/Buyer)   -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="guide-section" id="guide-take-sell">
+        <div class="guide-header">
+          <div class="badge badge-buy">BUYER · TAKER</div>
+          <h2 class="section-title">I want to take an existing Sell order</h2>
+          <p class="section-subtitle">Someone is already selling — you pick their order and buy their sats.</p>
+        </div>
+
+        <div class="guide-flow">
+          <span>Open Tor</span><span class="arrow">→</span>
+          <span>Generate Robot</span><span class="arrow">→</span>
+          <span>Browse Order Book</span><span class="arrow">→</span>
+          <span>Take Order</span><span class="arrow">→</span>
+          <span>Lock Bond</span><span class="arrow">→</span>
+          <span>Submit Invoice</span><span class="arrow">→</span>
+          <span>Send Fiat</span><span class="arrow">→</span>
+          <span>Receive Sats ⚡</span>
+        </div>
+
+        <div style="max-width:700px;margin:0 auto;">
+
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <div class="guide-step-content">
+              <h3>Open RoboSats & Generate Robot</h3>
+              <p>Open Tor Browser, go to the Ammanaya onion address, and generate your robot. <strong>Save your token!</strong></p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <div class="guide-step-content">
+              <h3>Browse the Order Book</h3>
+              <p>Go to the <strong>order book</strong> and look for <strong>SELL</strong> orders. Filter by your currency and preferred payment method.</p>
+              <p>Check the <strong>premium</strong> — this is how much above/below market price the seller is asking. Lower premium = better deal for you.</p>
+              <div class="tip">💡 You can also filter by amount range to find orders that match how much you want to spend.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <div class="guide-step-content">
+              <h3>Take the Order</h3>
+              <p>Found a good offer? Click on the order and hit <strong>"Take Order"</strong>. You'll need to specify the exact fiat amount if the order has a range.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <div class="guide-step-content">
+              <h3>Lock Your Fidelity Bond</h3>
+              <p>Pay the bond hold invoice (3% of trade amount) with your Lightning wallet. The seller has already locked their bond AND the escrow when they created the order.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">5</div>
+            <div class="guide-step-content">
+              <h3>Submit Your Payout Invoice</h3>
+              <p>Provide a Lightning invoice from your wallet where you want to receive the sats.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">6</div>
+            <div class="guide-step-content">
+              <h3>Send Fiat & Confirm</h3>
+              <p>Send fiat to the seller using the agreed payment method. Click <strong>"Confirm fiat sent"</strong> when done.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">7</div>
+            <div class="guide-step-content">
+              <h3>Receive Your Sats ⚡</h3>
+              <p>Seller confirms receipt of fiat → sats released to your invoice → bonds returned. <strong>🎉 Done!</strong></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- GUIDE 3: CREATE A SELL ORDER (Maker/Seller) -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="guide-section" id="guide-create-sell">
+        <div class="guide-header">
+          <div class="badge badge-sell">SELLER · MAKER</div>
+          <h2 class="section-title">I want to sell Bitcoin</h2>
+          <p class="section-subtitle">You create the order, set the terms, and wait for a buyer to take it.</p>
+        </div>
+
+        <div class="guide-flow">
+          <span>Open Tor</span><span class="arrow">→</span>
+          <span>Generate Robot</span><span class="arrow">→</span>
+          <span>Create Order</span><span class="arrow">→</span>
+          <span>Lock Bond + Escrow</span><span class="arrow">→</span>
+          <span>Wait for Buyer</span><span class="arrow">→</span>
+          <span>Receive Fiat</span><span class="arrow">→</span>
+          <span>Confirm 💶</span>
+        </div>
+
+        <div style="max-width:700px;margin:0 auto;">
+
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <div class="guide-step-content">
+              <h3>Open RoboSats & Generate Robot</h3>
+              <p>Open Tor Browser, go to the Ammanaya onion address, and generate your robot. <strong>Save your token!</strong></p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <div class="guide-step-content">
+              <h3>Create a SELL Order</h3>
+              <p>Click <strong>"Create"</strong> and configure:</p>
+              <p>• <strong>Type:</strong> Sell<br>
+                 • <strong>Amount:</strong> How much fiat you want to receive (e.g. 100 EUR)<br>
+                 • <strong>Currency:</strong> The fiat currency you want<br>
+                 • <strong>Payment method:</strong> How you want to receive fiat (Bizum, Revolut, etc.)<br>
+                 • <strong>Premium:</strong> % above market price. Higher premium = you get more fiat per sat, but order may take longer to fill.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <div class="guide-step-content">
+              <h3>Lock Bond + Trade Escrow</h3>
+              <p>As a seller, you pay <strong>two hold invoices</strong>:</p>
+              <p>• <strong>Fidelity bond</strong> (3%) — returned after successful trade<br>
+                 • <strong>Trade escrow</strong> — the actual sats you're selling, held until buyer sends fiat</p>
+              <div class="warning">⚠️ Make sure your Lightning wallet has enough balance for both the bond and the escrow combined.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <div class="guide-step-content">
+              <h3>Wait for a Buyer</h3>
+              <p>Your order is live. A buyer will see it and can take it. Enable notifications to know when someone does.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">5</div>
+            <div class="guide-step-content">
+              <h3>Buyer Takes Your Order</h3>
+              <p>A buyer locks their bond and the trade begins. They submit their payout invoice and then send you fiat.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">6</div>
+            <div class="guide-step-content">
+              <h3>Receive Fiat & Confirm</h3>
+              <p>Check your payment method (bank account, Bizum, Revolut, etc.) for the incoming fiat payment.</p>
+              <p>Once you've <strong>verified the payment is in your account</strong>, click <strong>"Confirm fiat received"</strong>.</p>
+              <div class="warning">⚠️ <strong>NEVER confirm fiat received before it's actually in your account.</strong> Check for pending vs. completed status. Scammers may show fake screenshots.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">7</div>
+            <div class="guide-step-content">
+              <h3>Trade Complete 🎉</h3>
+              <p>Once you confirm, the escrowed sats are released to the buyer. Your bond is returned. You've sold Bitcoin privately.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- GUIDE 4: TAKE A BUY ORDER (Taker/Seller)   -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="guide-section" id="guide-take-buy">
+        <div class="guide-header">
+          <div class="badge badge-sell">SELLER · TAKER</div>
+          <h2 class="section-title">I want to take an existing Buy order</h2>
+          <p class="section-subtitle">Someone wants to buy sats — you sell to them by taking their order.</p>
+        </div>
+
+        <div class="guide-flow">
+          <span>Open Tor</span><span class="arrow">→</span>
+          <span>Generate Robot</span><span class="arrow">→</span>
+          <span>Browse Order Book</span><span class="arrow">→</span>
+          <span>Take Order</span><span class="arrow">→</span>
+          <span>Lock Bond + Escrow</span><span class="arrow">→</span>
+          <span>Receive Fiat</span><span class="arrow">→</span>
+          <span>Confirm 💶</span>
+        </div>
+
+        <div style="max-width:700px;margin:0 auto;">
+
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <div class="guide-step-content">
+              <h3>Open RoboSats & Generate Robot</h3>
+              <p>Open Tor Browser, go to the Ammanaya onion address, and generate your robot. <strong>Save your token!</strong></p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <div class="guide-step-content">
+              <h3>Browse the Order Book</h3>
+              <p>Look for <strong>BUY</strong> orders — these are people who want to buy sats from you. Filter by currency and payment method.</p>
+              <div class="tip">💡 BUY orders with a high positive premium mean the buyer is willing to pay more — good deal for you as seller!</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <div class="guide-step-content">
+              <h3>Take the Order</h3>
+              <p>Click on the order and hit <strong>"Take Order"</strong>.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <div class="guide-step-content">
+              <h3>Lock Bond + Trade Escrow</h3>
+              <p>As taker-seller, you pay the <strong>fidelity bond (3%)</strong> and the <strong>trade escrow</strong> (the sats the buyer is purchasing). Two hold invoices.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">5</div>
+            <div class="guide-step-content">
+              <h3>Buyer Sends Fiat</h3>
+              <p>The buyer sends fiat via the payment method specified in the order. Wait for the payment to arrive in your account.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">6</div>
+            <div class="guide-step-content">
+              <h3>Confirm Fiat Received</h3>
+              <p>Verify the fiat is <strong>actually in your account</strong> (not just pending). Then click <strong>"Confirm fiat received"</strong>.</p>
+              <div class="warning">⚠️ Always verify the payment is fully settled before confirming. Once confirmed, sats are released and cannot be reversed.</div>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="guide-step-num">7</div>
+            <div class="guide-step-content">
+              <h3>Trade Complete 🎉</h3>
+              <p>Sats released to buyer, bonds returned to both parties. You've sold Bitcoin privately with no KYC.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BACK TO HOME -->
+  <section class="section" style="padding-top:0;">
+    <div class="container" style="text-align:center;">
+      <a href="index.html" class="btn btn-secondary">← Back to Home</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding:2rem;text-align:center;opacity:0.5;font-size:0.85rem;">
+    <p>Ammanaya 🔥⚡ — The fire that sets you free</p>
+    <p style="margin-top:0.5rem;">Powered by <a href="https://github.com/RoboSats/robosats" target="_blank" rel="noopener" style="color:#f7931a;">RoboSats</a></p>
+  </footer>
+
+  <script>
+    // Guide tab switching
+    document.querySelectorAll('.guide-nav a').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        const id = btn.dataset.guide;
+        document.querySelectorAll('.guide-nav a').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.guide-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('guide-' + id)?.classList.add('active');
+        window.scrollTo({ top: document.querySelector('.guide-section.active').offsetTop - 100, behavior: 'smooth' });
+      });
+    });
+    // Mobile nav
+    document.querySelector('.nav-toggle')?.addEventListener('click', function() {
+      document.querySelector('.nav-links')?.classList.toggle('open');
+      this.classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>

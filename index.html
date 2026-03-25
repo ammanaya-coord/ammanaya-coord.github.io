@@ -23,8 +23,9 @@
       <ul class="nav-links">
         <li><a href="#what-is">What is it</a></li>
         <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="guides.html">Guides</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="#connect">Connect</a></li>
-        <li><a href="#security">Security</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Menu">
@@ -280,6 +281,86 @@
           <p>1. Do not share personal information through the chat unless strictly needed for completing the trade.</p>
           <p>2. Users are solely responsible for complying with their local laws regarding cryptocurrency transactions.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-subtitle">Everything you need to know before your first trade.</p>
+      <div style="max-width:700px;margin:0 auto;">
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What is RoboSats and how does Ammanaya fit in?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;">RoboSats is an open-source P2P exchange protocol for buying and selling Bitcoin over the Lightning Network. Ammanaya is a <strong>coordinator</strong> — an independent node that facilitates trades. Think of RoboSats as the protocol and Ammanaya as one of the servers you can trade through.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">Do I need to create an account?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;">No. RoboSats generates a random robot identity for you — no email, no phone, no personal data. Your <strong>robot token</strong> is your only credential. Save it to recover your robot later.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What wallet do I need?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;">You need a Lightning wallet that supports <strong>hold invoices</strong>. Recommended: <strong>Phoenix, Zeus, Blixt, Electrum, Alby</strong>. Wallet of Satoshi works but is custodial. Check the full <a href="https://learn.robosats.org/docs/wallets/" target="_blank" style="color:#f7931a;">compatibility list</a>.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What is a fidelity bond?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;">A fidelity bond is a small amount of sats (default 3% of the trade) locked via a Lightning hold invoice. It guarantees both parties are serious. The bond is <strong>returned after a successful trade</strong>. It's only forfeited if you abandon or try to cheat.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What is a hold invoice?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;">A hold invoice is a special Lightning invoice that <strong>locks your sats without spending them</strong>. The payment is "held" by the coordinator and only settled (spent) or cancelled (returned) based on the outcome of the trade. This is how RoboSats achieves non-custodial escrow.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What are the fees?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;"><strong>Maker fee:</strong> 0.02% (the person who creates the order)<br><strong>Taker fee:</strong> 0.17% (the person who takes the order)<br><strong>Total:</strong> 0.19% per trade. 50% of fees are donated to RoboSats development.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What is the premium?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;">The premium is the percentage above or below the current Bitcoin market price. <strong>0%</strong> = market price. <strong>+5%</strong> means the buyer pays 5% more than market (good for sellers). <strong>-2%</strong> means a discount (good for buyers). It's set by the order creator and determines how attractive the offer is.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">Why do I need Tor?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;">Tor hides your IP address and location. Since the goal is private, no-KYC trading, using Tor is essential. The Ammanaya coordinator is <strong>only accessible via Tor</strong> (onion address) — there's no clearnet access by design.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What happens if there's a dispute?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;">Either party can open a dispute if something goes wrong. The coordinator reviews the evidence from the trade chat and makes a fair decision. The dishonest party loses their bond. Disputes are rare — the bond system incentivizes honest behavior.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">Can I cancel an order?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;"><strong>Before someone takes it:</strong> Yes, free cancellation — your bond is returned immediately.<br><strong>After someone takes it:</strong> Cancellation is possible if both parties agree (collaborative cancel). If only you want to cancel, you may lose your bond.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What payment methods are supported?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;">Any payment method agreed between buyer and seller. Common ones: <strong>Bizum, Revolut, bank transfer (SEPA), PayPal, Wise, N26</strong>, and more. The coordinator doesn't restrict payment methods — that's between you and your trading partner.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">How long does a trade take?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;">Once both parties are matched: typically <strong>5-30 minutes</strong> depending on the fiat payment method. Instant methods like Bizum or Revolut are fastest. Bank transfers may take longer. The waiting time for someone to take your order varies — from minutes to hours.</div>
+        </details>
+
+        <details style="margin-bottom:1rem;background:var(--bg-card,#161616);border:1px solid rgba(42,37,32,0.5);border-radius:12px;overflow:hidden;">
+          <summary style="padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">Is there a minimum/maximum trade amount?<span style="color:#f7931a;">+</span></summary>
+          <div style="padding:0 1.5rem 1.2rem;color:#8a8278;line-height:1.7;"><strong>Minimum:</strong> 100 sats<br><strong>Maximum:</strong> 250,000 sats (this limit increases over time as the coordinator builds reputation in the federation)</div>
+        </details>
+
+      </div>
+
+      <div style="text-align:center;margin-top:2rem;">
+        <a href="guides.html" class="btn btn-primary" style="text-decoration:none;">📖 View Step-by-Step Guides</a>
       </div>
     </div>
   </section>
