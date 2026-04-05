@@ -342,7 +342,7 @@ section {
 /* ── QUE ES ── */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin-top: 2rem;
 }
@@ -1116,26 +1116,34 @@ section {
   scroll-margin-top: 70px;
 }
 
-/* Balanced steps in landscape/desktop */
+/* Balanced steps grid */
 .steps {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
   justify-content: center;
 }
+.steps::before {
+  display: none;
+}
 .step {
-  flex: 1 1 200px;
-  max-width: 280px;
-  min-width: 180px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+.step:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 60px rgba(247, 147, 26, 0.06);
 }
 @media (max-width: 768px) {
   .steps {
-    flex-direction: column;
-    align-items: stretch;
+    grid-template-columns: 1fr;
   }
   .step {
     max-width: 100%;
-    min-width: auto;
   }
 }
 
