@@ -4,132 +4,182 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ammanaya - Trading Guides</title>
-  <meta name="description" content="Step-by-step guides for buying and selling Bitcoin on Ammanaya via RoboSats. No KYC, Lightning Network.">
+  <meta name="description" content="Interactive step-by-step guides for buying and selling Bitcoin on Ammanaya via RoboSats. No KYC, Lightning Network.">
   <link rel="icon" href="ammanaya.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    .guide-nav { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-bottom:3rem; }
-    .guide-nav a {
-      padding:0.8rem 1.5rem; border-radius:50px; font-weight:600; font-size:0.9rem;
-      border:1.5px solid var(--border-color); background:var(--bg-card); color:var(--text-primary);
-      transition: all 0.25s;
+    /* Wizard selector */
+    .wizard-question {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
     }
-    .guide-nav a:hover, .guide-nav a.active {
-      border-color:var(--accent-orange); color:var(--accent-orange);
-      background:rgba(247,147,26,0.08); box-shadow:0 0 20px rgba(247,147,26,0.1);
+    .wizard-options {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
     }
-    .guide-section { display:none; }
-    .guide-section.active { display:block; }
+    .wizard-btn {
+      padding: 1rem 2.5rem;
+      border-radius: 14px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: 2px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 160px;
+    }
+    .wizard-btn:hover {
+      border-color: var(--accent-orange);
+      color: var(--accent-orange);
+      background: rgba(247,147,26,0.08);
+      box-shadow: 0 0 30px rgba(247,147,26,0.15);
+      transform: translateY(-3px);
+    }
+    .wizard-btn.active {
+      border-color: var(--accent-orange);
+      color: #0a0a0a;
+      background: var(--accent-orange);
+      box-shadow: 0 4px 20px rgba(247,147,26,0.3);
+    }
+    .wizard-btn .btn-icon {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Breadcrumb */
+    .wizard-breadcrumb {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    .wizard-breadcrumb span {
+      color: var(--accent-orange);
+      font-weight: 600;
+    }
+    .wizard-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: var(--font-body);
+      margin-bottom: 1.5rem;
+      transition: color 0.25s;
+    }
+    .wizard-back:hover { color: var(--accent-orange); }
+
+    /* Guide steps */
+    .guide-flow { max-width: 800px; margin: 0 auto; }
     .guide-step {
-      display:flex; gap:1.5rem; margin-bottom:2rem; align-items:flex-start;
+      margin-bottom: 3rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .guide-step:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    }
+    .guide-step-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(247,147,26,0.04);
     }
     .guide-step-num {
-      flex-shrink:0; width:48px; height:48px; border-radius:50%;
-      background:var(--bg-card); border:2px solid var(--accent-orange);
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--font-display); font-weight:700; font-size:1.2rem;
-      color:var(--accent-orange); box-shadow:0 0 15px rgba(247,147,26,0.15);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-orange);
+      color: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
     }
-    .guide-step-content { flex:1; }
-    .guide-step-content h3 {
-      font-family:var(--font-display); font-size:1.1rem; font-weight:600;
-      margin-bottom:0.5rem;
+    .guide-step-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
     }
-    .guide-step-content p {
-      color:var(--text-secondary); font-size:0.95rem; line-height:1.7;
+    .guide-step-body {
+      padding: 1.5rem;
     }
-    .guide-step-content .tip {
-      margin-top:0.75rem; padding:0.75rem 1rem; border-radius:10px;
-      background:rgba(247,147,26,0.06); border-left:3px solid var(--accent-orange);
-      font-size:0.88rem; color:var(--text-secondary);
+    .guide-step-body p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
     }
-    .guide-step-content .warning {
-      margin-top:0.75rem; padding:0.75rem 1rem; border-radius:10px;
-      background:rgba(217,79,79,0.06); border-left:3px solid var(--accent-red);
-      font-size:0.88rem; color:var(--text-secondary);
+    .guide-step-body p:last-child { margin-bottom: 0; }
+    .guide-step-img {
+      width: 100%;
+      max-width: 420px;
+      display: block;
+      margin: 1rem auto;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .guide-header { text-align:center; margin-bottom:2.5rem; }
-    .guide-header .badge {
-      display:inline-block; padding:0.3rem 1rem; border-radius:50px;
-      font-size:0.8rem; font-weight:600; margin-bottom:1rem;
+    .guide-step-warning {
+      background: rgba(247,147,26,0.08);
+      border: 1px solid rgba(247,147,26,0.2);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      color: var(--accent-amber);
+      margin-top: 0.8rem;
     }
-    .badge-buy { background:rgba(34,197,94,0.12); color:#34d058; border:1px solid rgba(34,197,94,0.2); }
-    .badge-sell { background:rgba(239,68,68,0.12); color:#f87171; border:1px solid rgba(239,68,68,0.2); }
-    .guide-img-placeholder {
-      margin:1rem 0; border-radius:12px; overflow:hidden;
-      border:1px solid var(--border-color); background:var(--bg-card);
-      text-align:center; padding:2rem; color:var(--text-secondary); font-size:0.85rem;
-      cursor:pointer; transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .guide-img-placeholder:hover {
-      transform:scale(1.015); box-shadow:0 4px 24px rgba(247,147,26,0.12);
-    }
-    .guide-img-placeholder img {
-      max-width:100%; border-radius:8px;
-    }
-    .img-zoom-hint {
-      display:block; margin-top:0.5rem; font-size:0.78rem; opacity:0.5;
-      transition: opacity 0.2s;
-    }
-    .guide-img-placeholder:hover .img-zoom-hint { opacity:0.9; }
-
-    /* Lightbox */
-    .lightbox-overlay {
-      position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.92);
-      display:none; align-items:center; justify-content:center;
-      cursor:zoom-out; backdrop-filter:blur(4px);
-    }
-    .lightbox-overlay.active { display:flex; }
-    .lightbox-overlay img {
-      max-width:92vw; max-height:92vh; border-radius:12px;
-      box-shadow:0 8px 60px rgba(0,0,0,0.6);
-      animation: lightboxIn 0.25s ease;
-    }
-    @keyframes lightboxIn {
-      from { transform:scale(0.9); opacity:0; }
-      to { transform:scale(1); opacity:1; }
+    .guide-step-tip {
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      color: #34d058;
+      margin-top: 0.8rem;
     }
 
-    /* Step fade-in animation */
-    .guide-step {
-      opacity:0; transform:translateY(24px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .guide-step.visible {
-      opacity:1; transform:translateY(0);
+    /* Sections visibility */
+    .wizard-panel { display: none; }
+    .wizard-panel.active { display: block; }
+
+    /* Connector line between steps */
+    .guide-connector {
+      width: 2px;
+      height: 24px;
+      background: linear-gradient(to bottom, var(--accent-orange), transparent);
+      margin: 0 auto;
     }
 
-    /* Progress indicator */
-    .guide-progress {
-      position:sticky; top:70px; z-index:100;
-      text-align:center; padding:0.5rem 1rem;
-      font-size:0.82rem; font-weight:600; color:var(--accent-orange);
-      background:var(--bg-card); border-bottom:1px solid var(--border-color);
-      border-radius:0 0 12px 12px; box-shadow:0 2px 12px rgba(0,0,0,0.15);
-      opacity:0; transition: opacity 0.3s;
-      pointer-events:none;
-    }
-    .guide-progress.visible { opacity:1; }
-    .guide-progress .progress-bar {
-      height:3px; background:var(--accent-orange); border-radius:3px;
-      margin-top:0.3rem; transition: width 0.3s ease;
-    }
-    .guide-flow {
-      display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center;
-      margin:1.5rem 0; padding:1rem; background:var(--bg-card);
-      border-radius:12px; border:1px solid var(--border-color);
-    }
-    .guide-flow span {
-      padding:0.4rem 0.8rem; border-radius:8px; font-size:0.8rem; font-weight:600;
-      background:rgba(247,147,26,0.08); color:var(--accent-orange);
-    }
-    .guide-flow .arrow { background:none; color:var(--text-secondary); }
-    @media (max-width:768px) {
-      .guide-step { flex-direction:column; align-items:center; text-align:center; }
-      .guide-nav a { font-size:0.8rem; padding:0.6rem 1rem; }
+    @media (max-width: 768px) {
+      .wizard-btn { min-width: 120px; padding: 0.8rem 1.5rem; font-size: 1rem; }
+      .wizard-btn .btn-icon { font-size: 1.5rem; }
+      .guide-step-img { max-width: 100%; }
     }
   </style>
 </head>
@@ -144,8 +194,8 @@
       </a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#faq">FAQ</a></li>
         <li><a href="guides.html" class="active">Guides</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Menu">
@@ -154,608 +204,320 @@
     </div>
   </nav>
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="Full-size screenshot">
-  </div>
-
-  <!-- PROGRESS INDICATOR -->
-  <div class="guide-progress" id="guideProgress">
-    <span id="progressText">Step 1 of 9</span>
-    <div class="progress-bar" id="progressBar" style="width:0%"></div>
-  </div>
-
-  <!-- HERO -->
-  <section class="hero" style="min-height:auto;padding:6rem 1.5rem 2rem;">
+  <section class="hero" style="min-height:auto;padding-top:120px;padding-bottom:2rem;">
     <div class="container">
-      <h1><span class="highlight">Trading Guides</span></h1>
-      <p class="tagline">Step-by-step instructions for every scenario</p>
+      <h1><span class="highlight">Trading Guide</span></h1>
+      <p class="tagline">Learn to trade Bitcoin privately, step by step</p>
     </div>
   </section>
 
-  <!-- GUIDE NAV -->
-  <section class="section" style="padding-top:2rem;">
+  <section class="section" style="padding-top:1rem;">
     <div class="container">
-      <div class="guide-nav">
-        <a href="#" data-guide="create-buy" class="active">🛒 Create a Buy Order</a>
-        <a href="#" data-guide="take-sell">📥 Take a Sell Order</a>
-        <a href="#" data-guide="create-sell">💰 Create a Sell Order</a>
-        <a href="#" data-guide="take-buy">📤 Take a Buy Order</a>
+
+      <!-- LEVEL 1: What do you want to do? -->
+      <div id="wizard-l1" class="wizard-panel active">
+        <p class="wizard-question">What would you like to do?</p>
+        <div class="wizard-options">
+          <button class="wizard-btn" onclick="selectAction('buy')">
+            <span class="btn-icon">🛒</span>
+            BUY
+          </button>
+          <button class="wizard-btn" onclick="selectAction('sell')">
+            <span class="btn-icon">💰</span>
+            SELL
+          </button>
+          <button class="wizard-btn" onclick="selectAction('dispute')">
+            <span class="btn-icon">⚖️</span>
+            DISPUTE
+          </button>
+        </div>
       </div>
 
-      <!-- ═══════════════════════════════════════════ -->
-      <!-- GUIDE 1: CREATE A BUY ORDER (Maker/Buyer)  -->
-      <!-- ═══════════════════════════════════════════ -->
-      <div class="guide-section active" id="guide-create-buy">
-        <div class="guide-header">
-          <div class="badge badge-buy">BUYER · MAKER</div>
-          <h2 class="section-title">I want to buy Bitcoin</h2>
-          <p class="section-subtitle">You create the order, set the terms, and wait for a seller to take it.</p>
+      <!-- LEVEL 2: How? -->
+      <div id="wizard-l2-buy" class="wizard-panel">
+        <button class="wizard-back" onclick="goBack('wizard-l1')">← Back</button>
+        <div class="wizard-breadcrumb"><span>BUY</span> → Choose your role</div>
+        <p class="wizard-question">How do you want to buy?</p>
+        <div class="wizard-options">
+          <button class="wizard-btn" onclick="selectGuide('buy-maker')">
+            <span class="btn-icon">📝</span>
+            MAKER
+            <div style="font-size:0.75rem;font-weight:400;color:var(--text-secondary);margin-top:0.3rem;">Create your own order</div>
+          </button>
+          <button class="wizard-btn" onclick="selectGuide('buy-taker')">
+            <span class="btn-icon">🎯</span>
+            TAKER
+            <div style="font-size:0.75rem;font-weight:400;color:var(--text-secondary);margin-top:0.3rem;">Take an existing order</div>
+          </button>
         </div>
+      </div>
+
+      <div id="wizard-l2-sell" class="wizard-panel">
+        <button class="wizard-back" onclick="goBack('wizard-l1')">← Back</button>
+        <div class="wizard-breadcrumb"><span>SELL</span> → Choose your role</div>
+        <p class="wizard-question">How do you want to sell?</p>
+        <div class="wizard-options">
+          <button class="wizard-btn" onclick="selectGuide('sell-maker')">
+            <span class="btn-icon">📝</span>
+            MAKER
+            <div style="font-size:0.75rem;font-weight:400;color:var(--text-secondary);margin-top:0.3rem;">Create your own order</div>
+          </button>
+          <button class="wizard-btn" onclick="selectGuide('sell-taker')">
+            <span class="btn-icon">🎯</span>
+            TAKER
+            <div style="font-size:0.75rem;font-weight:400;color:var(--text-secondary);margin-top:0.3rem;">Take an existing order</div>
+          </button>
+        </div>
+      </div>
+
+      <div id="wizard-l2-dispute" class="wizard-panel">
+        <button class="wizard-back" onclick="goBack('wizard-l1')">← Back</button>
+        <div class="wizard-breadcrumb"><span>DISPUTE</span> → Choose your situation</div>
+        <p class="wizard-question">What's your situation?</p>
+        <div class="wizard-options">
+          <button class="wizard-btn" onclick="selectGuide('dispute-open')">
+            <span class="btn-icon">🚨</span>
+            OPEN DISPUTE
+            <div style="font-size:0.75rem;font-weight:400;color:var(--text-secondary);margin-top:0.3rem;">I need to report an issue</div>
+          </button>
+          <button class="wizard-btn" onclick="selectGuide('dispute-answer')">
+            <span class="btn-icon">📩</span>
+            ANSWER DISPUTE
+            <div style="font-size:0.75rem;font-weight:400;color:var(--text-secondary);margin-top:0.3rem;">Someone opened a dispute</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- GUIDE: BUY as MAKER -->
+      <div id="guide-buy-maker" class="wizard-panel">
+        <button class="wizard-back" onclick="goBack('wizard-l2-buy')">← Back</button>
+        <div class="wizard-breadcrumb"><span>BUY</span> → <span>MAKER</span> → Step-by-step guide</div>
 
         <div class="guide-flow">
-          <span>Open Tor</span><span class="arrow">→</span>
-          <span>Generate Robot</span><span class="arrow">→</span>
-          <span>Create Order</span><span class="arrow">→</span>
-          <span>Lock Bond</span><span class="arrow">→</span>
-          <span>Wait for Taker</span><span class="arrow">→</span>
-          <span>Send Fiat</span><span class="arrow">→</span>
-          <span>Receive Sats ⚡</span>
-        </div>
-
-        <div style="max-width:700px;margin:0 auto;">
 
           <div class="guide-step">
-            <div class="guide-step-num">1</div>
-            <div class="guide-step-content">
-              <h3>Open RoboSats via Tor</h3>
-              <p>Open <a href="https://www.torproject.org/download/" target="_blank">Tor Browser</a> and navigate to the Ammanaya onion address:</p>
+            <div class="guide-step-header">
+              <div class="guide-step-num">1</div>
+              <div class="guide-step-title">Access the Onion Address</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Open the Ammanaya coordinator in <a href="https://www.torproject.org/download/" target="_blank">Tor Browser</a> and click <strong>START</strong> to create a new robot.</p>
               <p><code style="font-size:0.8rem;word-break:break-all;">ammannjgzybw4qm2odmci7xgolh5grzijidacjxose5tthm375dcopad.onion</code></p>
-              <div class="tip">💡 Bookmark the address for quick access. Never use clearnet.</div>
+              <img src="images/guides/buy-maker/01-start.jpg" alt="RoboSats start screen" class="guide-step-img">
             </div>
           </div>
+          <div class="guide-connector"></div>
 
           <div class="guide-step">
-            <div class="guide-step-num">2</div>
-            <div class="guide-step-content">
-              <h3>Generate Your Robot</h3>
-              <p>A random robot identity is automatically generated for you. You'll see a unique robot avatar and name.</p>
-              <div class="warning">⚠️ <strong>Save your robot token immediately!</strong> It's the ONLY way to recover your identity. Write it down or copy it to a safe place. If you lose it, your robot is gone forever.</div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/robot-profile-token.jpg" alt="Robot profile and token">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
+            <div class="guide-step-header">
+              <div class="guide-step-num">2</div>
+              <div class="guide-step-title">Generate Your Robot & Save the Token</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Your robot is generated automatically. Press the <strong>copy icon</strong> next to the token to save it securely.</p>
+              <div class="guide-step-warning">⚠️ <strong>Back up your token immediately!</strong> It is the ONLY way to recover your robot. Never share it with anyone.</div>
+              <img src="images/guides/buy-maker/02-robot.jpg" alt="Robot generated with token" class="guide-step-img">
             </div>
           </div>
+          <div class="guide-connector"></div>
 
           <div class="guide-step">
-            <div class="guide-step-num">3</div>
-            <div class="guide-step-content">
-              <h3>Create a BUY Order</h3>
-              <p>Click <strong>"Create"</strong> and configure your order:</p>
-              <p>• <strong>Type:</strong> Buy<br>
-                 • <strong>Amount:</strong> How much fiat you want to spend (e.g. 50 EUR)<br>
-                 • <strong>Currency:</strong> Your fiat currency (EUR, USD, etc.)<br>
-                 • <strong>Payment method:</strong> How you'll send fiat (Bizum, Revolut, bank transfer, etc.)<br>
-                 • <strong>Premium:</strong> % above/below market price you're willing to pay. 0% = market price. Positive = you pay more (fills faster). Negative = you pay less (takes longer).</p>
-              <div class="tip">💡 A small positive premium (1-3%) makes your order more attractive to sellers and fills faster.</div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/create-buy-order.jpg" alt="Create Buy Order form">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
+            <div class="guide-step-header">
+              <div class="guide-step-num">3</div>
+              <div class="guide-step-title">Create Your Buy Order</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Go to the <strong>CREATE</strong> tab. Select <strong>BUY</strong>, enter the amount in your currency (e.g. EUR), choose your preferred payment methods, and set the premium (0% = market price).</p>
+              <p>Make sure <strong>Ammanaya</strong> is selected as the coordinator, then click <strong>CREATE ORDER</strong>.</p>
+              <img src="images/guides/buy-maker/03-create-order.jpg" alt="Create buy order" class="guide-step-img">
             </div>
           </div>
+          <div class="guide-connector"></div>
 
           <div class="guide-step">
-            <div class="guide-step-num">4</div>
-            <div class="guide-step-content">
-              <h3>Lock Your Fidelity Bond</h3>
-              <p>RoboSats generates a Lightning <strong>hold invoice</strong> for your fidelity bond (default: 3% of the trade amount). Pay it with your Lightning wallet.</p>
-              <p>The bond is <strong>not spent</strong> — it's locked temporarily and returned to you after the trade completes successfully. It only gets forfeited if you cheat or abandon the trade.</p>
-              <div class="tip">💡 Use a wallet that supports hold invoices: <strong>Phoenix, Zeus, Blixt, Electrum, Alby</strong>. Check <a href="https://learn.robosats.org/docs/wallets/" target="_blank" style="color:var(--accent-orange);">wallet compatibility</a>.</div>
+            <div class="guide-step-header">
+              <div class="guide-step-num">4</div>
+              <div class="guide-step-title">Lock Your Fidelity Bond</div>
+            </div>
+            <div class="guide-step-body">
+              <p>A Lightning hold invoice will appear. Pay it with your Lightning wallet to lock your <strong>fidelity bond</strong> (3% of the trade amount). This guarantees you're a serious trader.</p>
+              <div class="guide-step-tip">💡 This is a <strong>hold invoice</strong> — your sats are frozen, not spent. The bond is returned after a successful trade.</div>
+              <img src="images/guides/buy-maker/04-lock-bond.jpg" alt="Lock fidelity bond" class="guide-step-img">
             </div>
           </div>
+          <div class="guide-connector"></div>
 
           <div class="guide-step">
-            <div class="guide-step-num">5</div>
-            <div class="guide-step-content">
-              <h3>Wait for a Seller</h3>
-              <p>Your order is now <strong>live in the order book</strong>. A seller will see it and can take it. This may take minutes or hours depending on your premium and the market.</p>
-              <p>You can enable <strong>notifications</strong> via Telegram (@ammanaya_bot) or use in-app notifications so you don't have to keep the page open.</p>
-              <div class="tip">💡 You can cancel the order at any time before someone takes it — your bond is returned.</div>
+            <div class="guide-step-header">
+              <div class="guide-step-num">5</div>
+              <div class="guide-step-title">Wait for a Seller</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Your order is now public in the order book. Wait for a seller to take it. You'll receive a notification when someone matches with your order.</p>
+              <p>If no one takes your order before it expires, your bond is automatically returned — no action needed.</p>
+              <img src="images/guides/buy-maker/05-waiting.jpg" alt="Order public, waiting for seller" class="guide-step-img">
             </div>
           </div>
+          <div class="guide-connector"></div>
 
           <div class="guide-step">
-            <div class="guide-step-num">6</div>
-            <div class="guide-step-content">
-              <h3>Seller Takes Your Order</h3>
-              <p>When a seller takes your order, they lock their bond AND the trade escrow (the sats you're buying). Both sides are now committed.</p>
-              <p>You'll see a <strong>trade chat</strong> where you can communicate with the seller.</p>
+            <div class="guide-step-header">
+              <div class="guide-step-num">6</div>
+              <div class="guide-step-title">Submit Your Payout Invoice</div>
+            </div>
+            <div class="guide-step-body">
+              <p>A seller has taken your order! Now submit a <strong>Lightning invoice</strong> from your wallet for the amount of sats you'll receive. This is where your purchased Bitcoin will be sent.</p>
+              <p>Choose <strong>LIGHTNING</strong>, paste your invoice, and click <strong>SUBMIT</strong>.</p>
+              <img src="images/guides/buy-maker/06-submit-payout.jpg" alt="Submit payout invoice" class="guide-step-img">
             </div>
           </div>
+          <div class="guide-connector"></div>
 
           <div class="guide-step">
-            <div class="guide-step-num">7</div>
-            <div class="guide-step-content">
-              <h3>Submit Your Payout Invoice</h3>
-              <p>Provide a Lightning invoice from your wallet for the amount of sats you're buying. This is where you'll receive the Bitcoin once the trade completes.</p>
-              <div class="warning">⚠️ Make sure the invoice hasn't expired and has enough capacity in your wallet to receive.</div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/buyer-submit-invoice.jpg" alt="Submit payout Lightning invoice">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
+            <div class="guide-step-header">
+              <div class="guide-step-num">7</div>
+              <div class="guide-step-title">Chat with the Seller</div>
+            </div>
+            <div class="guide-step-body">
+              <p>The encrypted trade chat opens. Say hi and ask the seller to specify their payment details (e.g. phone number for Bizum, Revolut username, etc.).</p>
+              <p>Wait for the seller to choose a payment method and share their details.</p>
+              <img src="images/guides/buy-maker/07-chat.jpg" alt="Chat with seller" class="guide-step-img">
             </div>
           </div>
+          <div class="guide-connector"></div>
 
           <div class="guide-step">
-            <div class="guide-step-num">8</div>
-            <div class="guide-step-content">
-              <h3>Send Fiat Payment</h3>
-              <p>Send the agreed fiat amount to the seller via the payment method you specified (Bizum, Revolut, bank transfer, etc.). Follow any instructions the seller provides in the chat.</p>
-              <p>Once sent, click <strong>"Confirm fiat sent"</strong> in the trade interface.</p>
-              <div class="warning">⚠️ Only send fiat to the details provided in the RoboSats chat. Never communicate outside the platform.</div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/buyer-trade-chat.jpg" alt="Buyer trade chat">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/confirm-fiat-sent.jpg" alt="Confirm fiat sent dialog">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/waiting-seller-confirm.jpg" alt="Waiting for seller confirmation">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
+            <div class="guide-step-header">
+              <div class="guide-step-num">8</div>
+              <div class="guide-step-title">Send Fiat & Confirm</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Send the fiat payment to the seller using the agreed method. <strong>Only click "Confirm Sent"</strong> once you are absolutely sure the payment has been completed.</p>
+              <div class="guide-step-warning">⚠️ <strong>This action cannot be undone!</strong> If you confirm without actually sending the payment, you risk losing your bond.</div>
+              <img src="images/guides/buy-maker/08-confirm-sent.jpg" alt="Confirm fiat sent" class="guide-step-img">
             </div>
           </div>
+          <div class="guide-connector"></div>
 
           <div class="guide-step">
-            <div class="guide-step-num">9</div>
-            <div class="guide-step-content">
-              <h3>Receive Your Sats ⚡</h3>
-              <p>The seller confirms they received your fiat payment. The escrowed sats are <strong>instantly released</strong> to your Lightning invoice. Your bond is returned.</p>
-              <p><strong>🎉 Done!</strong> You just bought Bitcoin privately with no KYC.</p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/trade-finished-buyer.jpg" alt="Trade finished - buyer view">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
+            <div class="guide-step-header">
+              <div class="guide-step-num">9</div>
+              <div class="guide-step-title">Wait for Seller Confirmation</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Wait for the seller to confirm they received your fiat payment. Once confirmed, the escrowed sats are automatically released to your Lightning wallet.</p>
+              <p>Your fidelity bond is returned. <strong>Trade complete!</strong> 🎉</p>
+              <img src="images/guides/buy-maker/09-wait-seller.jpg" alt="Waiting for seller confirmation" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">10</div>
+              <div class="guide-step-title">Rate Your Experience</div>
+            </div>
+            <div class="guide-step-body">
+              <p>After the trade, you'll be asked to rate the platform and the coordinator. Your feedback helps improve the RoboSats ecosystem.</p>
+              <div class="guide-step-tip">💡 Ratings are anonymous — no reputation system for individual traders, which protects your privacy.</div>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- ═══════════════════════════════════════════ -->
-      <!-- GUIDE 2: TAKE A SELL ORDER (Taker/Buyer)   -->
-      <!-- ═══════════════════════════════════════════ -->
-      <div class="guide-section" id="guide-take-sell">
-        <div class="guide-header">
-          <div class="badge badge-buy">BUYER · TAKER</div>
-          <h2 class="section-title">I want to take an existing Sell order</h2>
-          <p class="section-subtitle">Someone is already selling — you pick their order and buy their sats.</p>
-        </div>
-
-        <div class="guide-flow">
-          <span>Open Tor</span><span class="arrow">→</span>
-          <span>Generate Robot</span><span class="arrow">→</span>
-          <span>Browse Order Book</span><span class="arrow">→</span>
-          <span>Take Order</span><span class="arrow">→</span>
-          <span>Lock Bond</span><span class="arrow">→</span>
-          <span>Submit Invoice</span><span class="arrow">→</span>
-          <span>Send Fiat</span><span class="arrow">→</span>
-          <span>Receive Sats ⚡</span>
-        </div>
-
-        <div style="max-width:700px;margin:0 auto;">
-
-          <div class="guide-step">
-            <div class="guide-step-num">1</div>
-            <div class="guide-step-content">
-              <h3>Open RoboSats & Generate Robot</h3>
-              <p>Open Tor Browser, go to the Ammanaya onion address, and generate your robot. <strong>Save your token!</strong></p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/robot-profile-token.jpg" alt="Robot profile and token">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">2</div>
-            <div class="guide-step-content">
-              <h3>Browse the Order Book</h3>
-              <p>Go to the <strong>order book</strong> and look for <strong>SELL</strong> orders. Filter by your currency and preferred payment method.</p>
-              <p>Check the <strong>premium</strong> — this is how much above/below market price the seller is asking. Lower premium = better deal for you.</p>
-              <div class="tip">💡 You can also filter by amount range to find orders that match how much you want to spend.</div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/order-book-full.jpg" alt="Order book view">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/order-book-ammanaya.jpg" alt="Ammanaya order in book">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">3</div>
-            <div class="guide-step-content">
-              <h3>Take the Order</h3>
-              <p>Found a good offer? Click on the order and hit <strong>"Take Order"</strong>. You'll need to specify the exact fiat amount if the order has a range.</p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/take-order-details.jpg" alt="Order details before taking">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">4</div>
-            <div class="guide-step-content">
-              <h3>Lock Your Fidelity Bond</h3>
-              <p>Pay the bond hold invoice (3% of trade amount) with your Lightning wallet. The seller has already locked their bond AND the escrow when they created the order.</p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/take-order-lock-bond.jpg" alt="Lock fidelity bond invoice">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">5</div>
-            <div class="guide-step-content">
-              <h3>Submit Your Payout Invoice</h3>
-              <p>Provide a Lightning invoice from your wallet where you want to receive the sats.</p>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">6</div>
-            <div class="guide-step-content">
-              <h3>Send Fiat & Confirm</h3>
-              <p>Send fiat to the seller using the agreed payment method. Click <strong>"Confirm fiat sent"</strong> when done.</p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/confirm-fiat-sent.jpg" alt="Confirm fiat sent dialog">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">7</div>
-            <div class="guide-step-content">
-              <h3>Receive Your Sats ⚡</h3>
-              <p>Seller confirms receipt of fiat → sats released to your invoice → bonds returned. <strong>🎉 Done!</strong></p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/trade-finished-buyer.jpg" alt="Trade finished - buyer view">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
+      <!-- GUIDE: BUY as TAKER (placeholder) -->
+      <div id="guide-buy-taker" class="wizard-panel">
+        <button class="wizard-back" onclick="goBack('wizard-l2-buy')">← Back</button>
+        <div class="wizard-breadcrumb"><span>BUY</span> → <span>TAKER</span></div>
+        <div style="text-align:center;padding:4rem 0;">
+          <p style="font-size:3rem;margin-bottom:1rem;">🚧</p>
+          <h2 style="font-family:var(--font-display);margin-bottom:0.5rem;">Coming Soon</h2>
+          <p style="color:var(--text-secondary);">This guide is being prepared. Check back soon!</p>
         </div>
       </div>
 
-      <!-- ═══════════════════════════════════════════ -->
-      <!-- GUIDE 3: CREATE A SELL ORDER (Maker/Seller) -->
-      <!-- ═══════════════════════════════════════════ -->
-      <div class="guide-section" id="guide-create-sell">
-        <div class="guide-header">
-          <div class="badge badge-sell">SELLER · MAKER</div>
-          <h2 class="section-title">I want to sell Bitcoin</h2>
-          <p class="section-subtitle">You create the order, set the terms, and wait for a buyer to take it.</p>
-        </div>
-
-        <div class="guide-flow">
-          <span>Open Tor</span><span class="arrow">→</span>
-          <span>Generate Robot</span><span class="arrow">→</span>
-          <span>Create Order</span><span class="arrow">→</span>
-          <span>Lock Bond + Escrow</span><span class="arrow">→</span>
-          <span>Wait for Buyer</span><span class="arrow">→</span>
-          <span>Receive Fiat</span><span class="arrow">→</span>
-          <span>Confirm 💶</span>
-        </div>
-
-        <div style="max-width:700px;margin:0 auto;">
-
-          <div class="guide-step">
-            <div class="guide-step-num">1</div>
-            <div class="guide-step-content">
-              <h3>Open RoboSats & Generate Robot</h3>
-              <p>Open Tor Browser, go to the Ammanaya onion address, and generate your robot. <strong>Save your token!</strong></p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/robot-profile-token.jpg" alt="Robot profile and token">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">2</div>
-            <div class="guide-step-content">
-              <h3>Create a SELL Order</h3>
-              <p>Click <strong>"Create"</strong> and configure:</p>
-              <p>• <strong>Type:</strong> Sell<br>
-                 • <strong>Amount:</strong> How much fiat you want to receive (e.g. 100 EUR)<br>
-                 • <strong>Currency:</strong> The fiat currency you want<br>
-                 • <strong>Payment method:</strong> How you want to receive fiat (Bizum, Revolut, etc.)<br>
-                 • <strong>Premium:</strong> % above market price. Higher premium = you get more fiat per sat, but order may take longer to fill.</p>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">3</div>
-            <div class="guide-step-content">
-              <h3>Lock Bond + Trade Escrow</h3>
-              <p>As a seller, you pay <strong>two hold invoices</strong>:</p>
-              <p>• <strong>Fidelity bond</strong> (3%) — returned after successful trade<br>
-                 • <strong>Trade escrow</strong> — the actual sats you're selling, held until buyer sends fiat</p>
-              <div class="warning">⚠️ Make sure your Lightning wallet has enough balance for both the bond and the escrow combined.</div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">4</div>
-            <div class="guide-step-content">
-              <h3>Wait for a Buyer</h3>
-              <p>Your order is live. A buyer will see it and can take it. Enable notifications to know when someone does.</p>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">5</div>
-            <div class="guide-step-content">
-              <h3>Buyer Takes Your Order</h3>
-              <p>A buyer locks their bond and the trade begins. They submit their payout invoice and then send you fiat.</p>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">6</div>
-            <div class="guide-step-content">
-              <h3>Receive Fiat & Confirm</h3>
-              <p>Check your payment method (bank account, Bizum, Revolut, etc.) for the incoming fiat payment.</p>
-              <p>Once you've <strong>verified the payment is in your account</strong>, click <strong>"Confirm fiat received"</strong>.</p>
-              <div class="warning">⚠️ <strong>NEVER confirm fiat received before it's actually in your account.</strong> Check for pending vs. completed status. Scammers may show fake screenshots.</div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/trade-chat-seller.jpg" alt="Trade chat - seller view">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/confirm-fiat-received.jpg" alt="Confirm fiat received dialog">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">7</div>
-            <div class="guide-step-content">
-              <h3>Trade Complete 🎉</h3>
-              <p>Once you confirm, the escrowed sats are released to the buyer. Your bond is returned. You've sold Bitcoin privately.</p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/trade-finished-seller.jpg" alt="Trade finished - seller view">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
+      <!-- GUIDE: SELL as MAKER (placeholder) -->
+      <div id="guide-sell-maker" class="wizard-panel">
+        <button class="wizard-back" onclick="goBack('wizard-l2-sell')">← Back</button>
+        <div class="wizard-breadcrumb"><span>SELL</span> → <span>MAKER</span></div>
+        <div style="text-align:center;padding:4rem 0;">
+          <p style="font-size:3rem;margin-bottom:1rem;">🚧</p>
+          <h2 style="font-family:var(--font-display);margin-bottom:0.5rem;">Coming Soon</h2>
+          <p style="color:var(--text-secondary);">This guide is being prepared. Check back soon!</p>
         </div>
       </div>
 
-      <!-- ═══════════════════════════════════════════ -->
-      <!-- GUIDE 4: TAKE A BUY ORDER (Taker/Seller)   -->
-      <!-- ═══════════════════════════════════════════ -->
-      <div class="guide-section" id="guide-take-buy">
-        <div class="guide-header">
-          <div class="badge badge-sell">SELLER · TAKER</div>
-          <h2 class="section-title">I want to take an existing Buy order</h2>
-          <p class="section-subtitle">Someone wants to buy sats — you sell to them by taking their order.</p>
-        </div>
-
-        <div class="guide-flow">
-          <span>Open Tor</span><span class="arrow">→</span>
-          <span>Generate Robot</span><span class="arrow">→</span>
-          <span>Browse Order Book</span><span class="arrow">→</span>
-          <span>Take Order</span><span class="arrow">→</span>
-          <span>Lock Bond + Escrow</span><span class="arrow">→</span>
-          <span>Receive Fiat</span><span class="arrow">→</span>
-          <span>Confirm 💶</span>
-        </div>
-
-        <div style="max-width:700px;margin:0 auto;">
-
-          <div class="guide-step">
-            <div class="guide-step-num">1</div>
-            <div class="guide-step-content">
-              <h3>Open RoboSats & Generate Robot</h3>
-              <p>Open Tor Browser, go to the Ammanaya onion address, and generate your robot. <strong>Save your token!</strong></p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/robot-profile-token.jpg" alt="Robot profile and token">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">2</div>
-            <div class="guide-step-content">
-              <h3>Browse the Order Book</h3>
-              <p>Look for <strong>BUY</strong> orders — these are people who want to buy sats from you. Filter by currency and payment method.</p>
-              <div class="tip">💡 BUY orders with a high positive premium mean the buyer is willing to pay more — good deal for you as seller!</div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/order-book-full.jpg" alt="Order book view">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/order-book-ammanaya.jpg" alt="Ammanaya order in book">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">3</div>
-            <div class="guide-step-content">
-              <h3>Take the Order</h3>
-              <p>Click on the order and hit <strong>"Take Order"</strong>.</p>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">4</div>
-            <div class="guide-step-content">
-              <h3>Lock Bond + Trade Escrow</h3>
-              <p>As taker-seller, you pay the <strong>fidelity bond (3%)</strong> and the <strong>trade escrow</strong> (the sats the buyer is purchasing). Two hold invoices.</p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/take-order-lock-escrow.jpg" alt="Lock trade escrow invoice">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/take-order-collateral-locked.jpg" alt="Collateral locked confirmation">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">5</div>
-            <div class="guide-step-content">
-              <h3>Buyer Sends Fiat</h3>
-              <p>The buyer sends fiat via the payment method specified in the order. Wait for the payment to arrive in your account.</p>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">6</div>
-            <div class="guide-step-content">
-              <h3>Confirm Fiat Received</h3>
-              <p>Verify the fiat is <strong>actually in your account</strong> (not just pending). Then click <strong>"Confirm fiat received"</strong>.</p>
-              <div class="warning">⚠️ Always verify the payment is fully settled before confirming. Once confirmed, sats are released and cannot be reversed.</div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/confirm-fiat-received.jpg" alt="Confirm fiat received dialog">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/trade-finished-rated.jpg" alt="Trade finished with ratings">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="guide-step">
-            <div class="guide-step-num">7</div>
-            <div class="guide-step-content">
-              <h3>Trade Complete 🎉</h3>
-              <p>Sats released to buyer, bonds returned to both parties. You've sold Bitcoin privately with no KYC.</p>
-              <div class="guide-img-placeholder" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="images/guides/trade-finished-seller.jpg" alt="Trade finished - seller view">
-                <span class="img-zoom-hint">🔍 Click to enlarge</span>
-              </div>
-            </div>
-          </div>
-
+      <!-- GUIDE: SELL as TAKER (placeholder) -->
+      <div id="guide-sell-taker" class="wizard-panel">
+        <button class="wizard-back" onclick="goBack('wizard-l2-sell')">← Back</button>
+        <div class="wizard-breadcrumb"><span>SELL</span> → <span>TAKER</span></div>
+        <div style="text-align:center;padding:4rem 0;">
+          <p style="font-size:3rem;margin-bottom:1rem;">🚧</p>
+          <h2 style="font-family:var(--font-display);margin-bottom:0.5rem;">Coming Soon</h2>
+          <p style="color:var(--text-secondary);">This guide is being prepared. Check back soon!</p>
         </div>
       </div>
 
-    </div>
-  </section>
+      <!-- GUIDE: DISPUTE - OPEN (placeholder) -->
+      <div id="guide-dispute-open" class="wizard-panel">
+        <button class="wizard-back" onclick="goBack('wizard-l2-dispute')">← Back</button>
+        <div class="wizard-breadcrumb"><span>DISPUTE</span> → <span>OPEN DISPUTE</span></div>
+        <div style="text-align:center;padding:4rem 0;">
+          <p style="font-size:3rem;margin-bottom:1rem;">🚧</p>
+          <h2 style="font-family:var(--font-display);margin-bottom:0.5rem;">Coming Soon</h2>
+          <p style="color:var(--text-secondary);">This guide is being prepared. Check back soon!</p>
+        </div>
+      </div>
 
-  <!-- BACK TO HOME -->
-  <section class="section" style="padding-top:0;">
-    <div class="container" style="text-align:center;">
-      <a href="index.html" class="btn btn-secondary">← Back to Home</a>
+      <!-- GUIDE: DISPUTE - ANSWER (placeholder) -->
+      <div id="guide-dispute-answer" class="wizard-panel">
+        <button class="wizard-back" onclick="goBack('wizard-l2-dispute')">← Back</button>
+        <div class="wizard-breadcrumb"><span>DISPUTE</span> → <span>ANSWER DISPUTE</span></div>
+        <div style="text-align:center;padding:4rem 0;">
+          <p style="font-size:3rem;margin-bottom:1rem;">🚧</p>
+          <h2 style="font-family:var(--font-display);margin-bottom:0.5rem;">Coming Soon</h2>
+          <p style="color:var(--text-secondary);">This guide is being prepared. Check back soon!</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer style="padding:2rem;text-align:center;opacity:0.5;font-size:0.85rem;">
     <p>Ammanaya 🔥⚡ — The fire that sets you free</p>
-    <p style="margin-top:0.5rem;">Powered by <a href="https://github.com/RoboSats/robosats" target="_blank" rel="noopener" style="color:#f7931a;">RoboSats</a></p>
+    <p style="margin-top:0.5rem;">Powered by <a href="https://github.com/RoboSats/robosats" target="_blank" rel="noopener" style="color:#ff6b35;">RoboSats</a></p>
   </footer>
 
   <script>
-    // Lightbox
-    function openLightbox(src) {
-      const overlay = document.getElementById('lightbox');
-      const img = document.getElementById('lightbox-img');
-      img.src = src;
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      const overlay = document.getElementById('lightbox');
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
-    });
-
-    // Guide tab switching
-    document.querySelectorAll('.guide-nav a').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        const id = btn.dataset.guide;
-        document.querySelectorAll('.guide-nav a').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.guide-section').forEach(s => s.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('guide-' + id)?.classList.add('active');
-        window.scrollTo({ top: document.querySelector('.guide-section.active').offsetTop - 100, behavior: 'smooth' });
-        // Re-observe steps for new active guide
-        initStepObservers();
-      });
-    });
-
-    // Mobile nav
+    // Mobile nav toggle
     document.querySelector('.nav-toggle')?.addEventListener('click', function() {
       document.querySelector('.nav-links')?.classList.toggle('open');
       this.classList.toggle('open');
     });
 
-    // Intersection Observer for fade-in animation & progress indicator
-    let stepObserver;
-    function initStepObservers() {
-      if (stepObserver) stepObserver.disconnect();
-      const activeSection = document.querySelector('.guide-section.active');
-      if (!activeSection) return;
-
-      const steps = activeSection.querySelectorAll('.guide-step');
-      const totalSteps = steps.length;
-      const progress = document.getElementById('guideProgress');
-      const progressText = document.getElementById('progressText');
-      const progressBar = document.getElementById('progressBar');
-
-      // Reset visibility
-      steps.forEach(s => s.classList.remove('visible'));
-
-      stepObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-        // Update progress based on last visible step
-        let lastVisible = 0;
-        steps.forEach((step, i) => {
-          if (step.classList.contains('visible')) lastVisible = i + 1;
-        });
-        if (lastVisible > 0) {
-          progress.classList.add('visible');
-          progressText.textContent = `Step ${lastVisible} of ${totalSteps}`;
-          progressBar.style.width = `${(lastVisible / totalSteps) * 100}%`;
-        } else {
-          progress.classList.remove('visible');
-        }
-      }, { threshold: 0.15, rootMargin: '-50px 0px' });
-
-      steps.forEach(step => stepObserver.observe(step));
+    function hideAll() {
+      document.querySelectorAll('.wizard-panel').forEach(p => p.classList.remove('active'));
     }
 
-    // Initialize on load
-    initStepObservers();
+    function show(id) {
+      hideAll();
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function selectAction(action) {
+      show('wizard-l2-' + action);
+    }
+
+    function selectGuide(guide) {
+      show('guide-' + guide);
+    }
+
+    function goBack(targetId) {
+      show(targetId);
+    }
   </script>
 
 </body>
