@@ -44,19 +44,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Repeating background pattern */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-image: url('../images/bg-pattern.jpg');
-  background-repeat: repeat-y;
-  background-size: 100% auto;
-  background-position: top center;
-  opacity: 0.07;
-  pointer-events: none;
-}
+/* Repeating background pattern - scrolls with page */
 
 /* Noise texture overlay */
 body::before {
