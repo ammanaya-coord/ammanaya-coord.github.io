@@ -142,6 +142,7 @@
       display: block;
       margin: 1rem auto;
       border-radius: 12px;
+      cursor: zoom-in;
       border: 1px solid var(--border-color);
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
@@ -163,6 +164,37 @@
       color: #34d058;
       margin-top: 0.8rem;
     }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,0.92);
+      cursor: zoom-out;
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.6);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    .lightbox-close:hover { opacity: 1; }
 
     /* Sections visibility */
     .wizard-panel { display: none; }
@@ -944,7 +976,35 @@
     <p style="margin-top:0.5rem;">Powered by <a href="https://github.com/RoboSats/robosats" target="_blank" rel="noopener" style="color:#ff6b35;">RoboSats</a></p>
   </footer>
 
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
   <script>
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+    // Attach click to all guide images
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('guide-step-img')) {
+        e.stopPropagation();
+        openLightbox(e.target.src);
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('lightbox').classList.contains('open')) {
+        closeLightbox();
+        e.stopPropagation();
+      }
+    });
+
     // Mobile nav toggle
     document.querySelector('.nav-toggle')?.addEventListener('click', function() {
       document.querySelector('.nav-links')?.classList.toggle('open');
