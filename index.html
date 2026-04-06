@@ -363,8 +363,21 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="section" id="contact">
-    <div class="container">
+  <section class="section" id="contact" style="position:relative;overflow:hidden;">
+    <!-- Fire background -->
+    <div style="position:absolute;inset:0;z-index:0;">
+      <img src="images/fire-bg.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.15;animation:fireFlicker 3s ease-in-out infinite alternate;">
+    </div>
+    <style>
+      @keyframes fireFlicker {
+        0% { transform: scale(1.0) translateY(0); opacity: 0.12; }
+        25% { opacity: 0.18; }
+        50% { transform: scale(1.03) translateY(-2px); opacity: 0.15; }
+        75% { opacity: 0.2; }
+        100% { transform: scale(1.01) translateY(1px); opacity: 0.13; }
+      }
+    </style>
+    <div class="container" style="position:relative;z-index:1;">
       <h2 class="section-title">Contact</h2>
       <p class="section-subtitle">Reach out through any of these channels.</p>
       <div class="features-grid" style="max-width:600px;margin:0 auto;">
@@ -395,7 +408,20 @@
           <h3>SimpleX</h3>
           <p>E2E Encrypted Chat</p>
         </a>
+        <a href="https://amboss.space/node/02cd566293ad8c8fd55bf5c5be38df5fc0af2b445333b10cbbd8b8a7d4c7ed7fe3" target="_blank" rel="noopener" class="feature-card" style="text-decoration:none;color:inherit;">
+          <div class="feature-icon">⚡</div>
+          <h3>Amboss</h3>
+          <p>Lightning Node</p>
+        </a>
       </div>
+    </div>
+  </section>
+
+  <!-- MUSIC PLAYER -->
+  <section style="padding:1.5rem 0;text-align:center;background:var(--bg-secondary);border-top:1px solid var(--border-color);">
+    <div class="container">
+      <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:0.8rem;">🔥 Ammanaya Fest — 3ra Edición</p>
+      <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lahun-514628850/ammanaya-fest-3ra-edicion&color=%23f7931a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false" style="max-width:600px;border-radius:12px;"></iframe>
     </div>
   </section>
 
