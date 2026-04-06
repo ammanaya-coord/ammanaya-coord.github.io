@@ -442,32 +442,8 @@
 
   <!-- MUSIC PLAYER -->
   <div style="text-align:center;padding:1.5rem 0;">
-    <button id="music-btn" onclick="toggleMusic()" style="width:64px;height:64px;border-radius:50%;border:2px solid rgba(247,147,26,0.3);background:rgba(22,22,22,0.9);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;box-shadow:0 0 20px rgba(247,147,26,0.1);" onmouseover="this.style.borderColor='#f7931a';this.style.boxShadow='0 0 30px rgba(247,147,26,0.25)'" onmouseout="this.style.borderColor='rgba(247,147,26,0.3)';this.style.boxShadow='0 0 20px rgba(247,147,26,0.1)'">
-      <span id="music-icon" style="color:#f7931a;font-size:1.6rem;margin-left:3px;">▶</span>
-    </button>
-    <p style="color:var(--text-secondary);font-size:0.75rem;margin-top:0.5rem;opacity:0.6;">Ammanaya Fest — 3ra Edición</p>
-    <audio id="music-audio" src="https://feeds.soundcloud.com/stream/1949549682-lahun-514628850-ammanaya-fest-3ra-edicion.mp3" preload="none"></audio>
+    <iframe width="300" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lahun-514628850/ammanaya-fest-3ra-edicion&color=%23f7931a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true" style="border-radius:12px;max-width:90%;filter:brightness(0.7) saturate(1.2);"></iframe>
   </div>
-  <script>
-    function toggleMusic() {
-      const audio = document.getElementById('music-audio');
-      const icon = document.getElementById('music-icon');
-      const btn = document.getElementById('music-btn');
-      if (audio.paused) {
-        audio.play();
-        icon.textContent = '⏸';
-        icon.style.marginLeft = '0';
-        btn.style.borderColor = '#f7931a';
-        btn.style.boxShadow = '0 0 30px rgba(247,147,26,0.3)';
-      } else {
-        audio.pause();
-        icon.textContent = '▶';
-        icon.style.marginLeft = '3px';
-        btn.style.borderColor = 'rgba(247,147,26,0.3)';
-        btn.style.boxShadow = '0 0 20px rgba(247,147,26,0.1)';
-      }
-    }
-  </script>
 
   <!-- FOOTER -->
   <footer style="padding:2rem;text-align:center;opacity:0.5;font-size:0.85rem;background:rgba(10,10,10,0.93);">
