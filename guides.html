@@ -427,14 +427,150 @@
         </div>
       </div>
 
-      <!-- GUIDE: BUY as TAKER (placeholder) -->
+      <!-- GUIDE: BUY as TAKER -->
       <div id="guide-buy-taker" class="wizard-panel">
         <button class="wizard-back" onclick="goBack('wizard-l2-buy')">← Back</button>
-        <div class="wizard-breadcrumb"><span>BUY</span> → <span>TAKER</span></div>
-        <div style="text-align:center;padding:4rem 0;">
-          <p style="font-size:3rem;margin-bottom:1rem;">🚧</p>
-          <h2 style="font-family:var(--font-display);margin-bottom:0.5rem;">Coming Soon</h2>
-          <p style="color:var(--text-secondary);">This guide is being prepared. Check back soon!</p>
+        <div class="wizard-breadcrumb"><span>BUY</span> → <span>TAKER</span> → Step-by-step guide</div>
+
+        <div class="guide-flow">
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">1</div>
+              <div class="guide-step-title">Access the Onion & Click START</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Open the Ammanaya coordinator in <a href="https://www.torproject.org/download/" target="_blank">Tor Browser</a> and click <strong>START</strong> to begin.</p>
+              <p><code style="font-size:0.8rem;word-break:break-all;">ammannjgzybw4qm2odmci7xgolh5grzijidacjxose5tthm375dcopad.onion</code></p>
+              <img src="images/guides/buy-taker/01-start.jpg" alt="RoboSats start screen" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">2</div>
+              <div class="guide-step-title">Generate Your Robot & Save the Token</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Your robot is generated automatically. Press the <strong>copy icon</strong> next to the token to save it securely.</p>
+              <div class="guide-step-warning">⚠️ <strong>Back up your token immediately!</strong> It is the ONLY way to recover your robot. Never share it with anyone.</div>
+              <img src="images/guides/buy-taker/02-robot.jpg" alt="Robot generated with token" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">3</div>
+              <div class="guide-step-title">Browse Orders & Choose One</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Go to the <strong>OFFERS</strong> tab. Browse the order book and look for <strong>SELL orders</strong> on the Ammanaya coordinator (identified by the Ammanaya logo). Click on the order you want to take.</p>
+              <img src="images/guides/buy-taker/03-search.jpg" alt="Browse orders" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">4</div>
+              <div class="guide-step-title">Review Details & Take the Order</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Review the order details: <strong>amount</strong>, <strong>premium</strong>, <strong>accepted payment methods</strong>, and <strong>expiry time</strong>. When satisfied, press <strong>TAKE ORDER</strong>.</p>
+              <img src="images/guides/buy-taker/04-take-order.jpg" alt="Review and take order" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">5</div>
+              <div class="guide-step-title">Lock Your Fidelity Bond</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Pay the <strong>fidelity bond</strong> (3%) via Lightning hold invoice to prove you're a serious buyer.</p>
+              <div class="guide-step-tip">💡 This is a <strong>hold invoice</strong> — your sats are frozen, not spent. The bond is returned after a successful trade.</div>
+              <img src="images/guides/buy-taker/05-lock-bond.jpg" alt="Lock fidelity bond" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">6</div>
+              <div class="guide-step-title">Submit Your Payout Invoice</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Submit a <strong>Lightning invoice</strong> from your wallet for the amount of sats you'll receive. This is where your purchased Bitcoin will be sent when the trade completes.</p>
+              <img src="images/guides/buy-taker/06-invoice.jpg" alt="Submit payout invoice" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">7</div>
+              <div class="guide-step-title">Wait for Seller to Lock Collateral</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Wait for the seller to lock their trade collateral (the sats you're buying). Once they do, the trade chat will open.</p>
+              <img src="images/guides/buy-taker/07-waiting.jpg" alt="Waiting for seller collateral" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">8</div>
+              <div class="guide-step-title">Chat, Choose Payment & Ask Details</div>
+            </div>
+            <div class="guide-step-body">
+              <p>The encrypted trade chat opens. Say hi, <strong>choose your preferred payment method</strong> from the seller's listed options, and ask for their payment details (Revolut tag, Bizum number, etc.).</p>
+              <p>As the <strong>taker, you choose</strong> which payment method to use.</p>
+              <img src="images/guides/buy-taker/08-chat.jpg" alt="Chat and choose payment method" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">9</div>
+              <div class="guide-step-title">Send Fiat & Confirm</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Send the fiat payment to the seller using the agreed method. <strong>Only click "Confirm Sent"</strong> once you are absolutely sure the payment has been completed successfully.</p>
+              <div class="guide-step-warning">⚠️ <strong>This action cannot be undone!</strong> If you confirm without actually sending the payment, you risk losing your bond.</div>
+              <img src="images/guides/buy-taker/09-confirm-sent.jpg" alt="Confirm fiat sent" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">10</div>
+              <div class="guide-step-title">Wait for Seller Confirmation</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Wait for the seller to confirm they received your fiat payment. Once confirmed, the escrowed sats are automatically released to your Lightning wallet.</p>
+              <img src="images/guides/buy-taker/10-wait-seller.jpg" alt="Waiting for seller confirmation" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">11</div>
+              <div class="guide-step-title">Receive Sats & Rate</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Trade complete! 🎉 Your sats arrive in your Lightning wallet and your bond is returned. Rate your experience with RoboSats and the Ammanaya coordinator.</p>
+              <div class="guide-step-tip">💡 Ratings are anonymous — no reputation system for individual traders, which protects your privacy.</div>
+              <img src="images/guides/buy-taker/11-rate.jpg" alt="Rate your trade experience" class="guide-step-img">
+            </div>
+          </div>
+
         </div>
       </div>
 
