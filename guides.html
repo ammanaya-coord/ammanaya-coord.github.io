@@ -441,11 +441,137 @@
       <!-- GUIDE: SELL as MAKER (placeholder) -->
       <div id="guide-sell-maker" class="wizard-panel">
         <button class="wizard-back" onclick="goBack('wizard-l2-sell')">← Back</button>
-        <div class="wizard-breadcrumb"><span>SELL</span> → <span>MAKER</span></div>
-        <div style="text-align:center;padding:4rem 0;">
-          <p style="font-size:3rem;margin-bottom:1rem;">🚧</p>
-          <h2 style="font-family:var(--font-display);margin-bottom:0.5rem;">Coming Soon</h2>
-          <p style="color:var(--text-secondary);">This guide is being prepared. Check back soon!</p>
+        <div class="wizard-breadcrumb"><span>SELL</span> → <span>MAKER</span> → Step-by-step guide</div>
+
+        <div class="guide-flow">
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">1</div>
+              <div class="guide-step-title">Access the Onion & Click START</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Open the Ammanaya coordinator in <a href="https://www.torproject.org/download/" target="_blank">Tor Browser</a> and click <strong>START</strong> to begin.</p>
+              <p><code style="font-size:0.8rem;word-break:break-all;">ammannjgzybw4qm2odmci7xgolh5grzijidacjxose5tthm375dcopad.onion</code></p>
+              <img src="images/guides/sell-maker/01-start.jpg" alt="RoboSats start screen" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">2</div>
+              <div class="guide-step-title">Generate Your Robot & Save the Token</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Your robot is generated automatically. Press the <strong>copy icon</strong> next to the token to save it securely.</p>
+              <div class="guide-step-warning">⚠️ <strong>Back up your token immediately!</strong> It is the ONLY way to recover your robot. Never share it with anyone.</div>
+              <img src="images/guides/sell-maker/02-robot.jpg" alt="Robot generated with token" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">3</div>
+              <div class="guide-step-title">Create Your Sell Order</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Go to the <strong>CREATE</strong> tab. Select <strong>SELL</strong>, enter the amount, choose your accepted payment methods (Revolut, Bizum, Instant SEPA, etc.), and set the premium.</p>
+              <p>Make sure <strong>Ammanaya</strong> is selected as the coordinator, then click <strong>CREATE ORDER</strong>.</p>
+              <img src="images/guides/sell-maker/03-create-order.jpg" alt="Create sell order" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">4</div>
+              <div class="guide-step-title">Lock Your Fidelity Bond</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Pay the <strong>fidelity bond</strong> (3%) via Lightning hold invoice. This guarantees you're a serious trader.</p>
+              <div class="guide-step-tip">💡 This is a <strong>hold invoice</strong> — your sats are frozen, not spent. The bond is returned after a successful trade.</div>
+              <img src="images/guides/sell-maker/04-lock-bond.jpg" alt="Lock fidelity bond" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">5</div>
+              <div class="guide-step-title">Lock the Trade Collateral</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Now lock the <strong>full trade amount</strong> (the sats you're selling) via another Lightning hold invoice. These sats will be held in escrow and released to the buyer once you confirm fiat received.</p>
+              <img src="images/guides/sell-maker/05-lock-escrow.jpg" alt="Lock trade collateral" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">6</div>
+              <div class="guide-step-title">Wait for a Buyer</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Your order is now public in the order book. Wait for a buyer to take it. You'll receive a notification when someone matches.</p>
+              <p>If no one takes your order before it expires, your bond and collateral are automatically returned — no action needed.</p>
+              <img src="images/guides/sell-maker/06-waiting.jpg" alt="Order public, waiting for buyer" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">7</div>
+              <div class="guide-step-title">Chat & Ask Payment Preference</div>
+            </div>
+            <div class="guide-step-body">
+              <p>A buyer has taken your order! The encrypted trade chat opens. Say hi and ask which payment method they prefer from the ones you offered.</p>
+              <p>The <strong>taker always chooses</strong> the payment method among the options you listed.</p>
+              <img src="images/guides/sell-maker/07-chat.jpg" alt="Chat with buyer - ask payment preference" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">8</div>
+              <div class="guide-step-title">Share Payment Details & Wait</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Once the buyer tells you their preferred method, share your payment details (e.g. Revolut tag, Bizum phone number, etc.) and wait for them to send the fiat.</p>
+              <img src="images/guides/sell-maker/08-chat-details.jpg" alt="Share payment details" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">9</div>
+              <div class="guide-step-title">Confirm Fiat Received</div>
+            </div>
+            <div class="guide-step-body">
+              <p>When the buyer notifies they've sent the payment, the <strong>"Confirm Received"</strong> button activates. Verify the fiat has arrived in your account, then confirm to release the sats.</p>
+              <div class="guide-step-warning">⚠️ <strong>This action cannot be undone!</strong> Only confirm after you have verified the payment. Some fiat methods can reverse transactions up to 80 days later — keep your token and order data as proof.</div>
+              <img src="images/guides/sell-maker/09-confirm.jpg" alt="Confirm fiat received" class="guide-step-img">
+            </div>
+          </div>
+          <div class="guide-connector"></div>
+
+          <div class="guide-step">
+            <div class="guide-step-header">
+              <div class="guide-step-num">10</div>
+              <div class="guide-step-title">Rate Your Experience</div>
+            </div>
+            <div class="guide-step-body">
+              <p>Trade complete! 🎉 Your bond is unlocked and the sats have been sent to the buyer. Rate your experience with RoboSats and the Ammanaya coordinator.</p>
+              <div class="guide-step-tip">💡 Ratings are anonymous — no reputation system for individual traders, which protects your privacy.</div>
+              <img src="images/guides/sell-maker/10-rate.jpg" alt="Rate your trade experience" class="guide-step-img">
+            </div>
+          </div>
+
         </div>
       </div>
 
