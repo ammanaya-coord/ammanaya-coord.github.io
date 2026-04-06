@@ -168,7 +168,82 @@
     .wizard-panel { display: none; }
     .wizard-panel.active { display: block; }
 
-    /* Connector line between steps */
+    /* Slideshow mode */
+    .guide-flow { position: relative; }
+    .guide-flow.slideshow-mode .guide-step { display: none; }
+    .guide-flow.slideshow-mode .guide-step.slide-active { display: block; }
+    .guide-flow.slideshow-mode .guide-connector { display: none; }
+
+    .slide-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .slide-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s;
+    }
+    .slide-btn:hover {
+      border-color: var(--accent-orange);
+      color: var(--accent-orange);
+      box-shadow: 0 0 20px rgba(247,147,26,0.15);
+    }
+    .slide-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .slide-counter {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--text-secondary);
+      min-width: 60px;
+      text-align: center;
+    }
+    .slide-counter span { color: var(--accent-orange); font-weight: 700; }
+    .slide-progress {
+      width: 100%;
+      height: 3px;
+      background: var(--border-color);
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .slide-progress-bar {
+      height: 100%;
+      background: var(--accent-orange);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    .slide-exit {
+      display: block;
+      margin: 1.5rem auto 0;
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid var(--border-color);
+      background: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .slide-exit:hover {
+      border-color: var(--accent-orange);
+      color: var(--accent-orange);
+    }
+
+    /* Connector line between steps (scroll mode) */
     .guide-connector {
       width: 2px;
       height: 24px;
@@ -876,6 +951,9 @@
       this.classList.toggle('open');
     });
 
+    let currentSlide = 0;
+    let currentFlow = null;
+
     function hideAll() {
       document.querySelectorAll('.wizard-panel').forEach(p => p.classList.remove('active'));
     }
@@ -892,10 +970,122 @@
 
     function selectGuide(guide) {
       show('guide-' + guide);
+      // Initialize slideshow
+      const panel = document.getElementById('guide-' + guide);
+      const flow = panel.querySelector('.guide-flow');
+      if (flow) initSlideshow(flow);
     }
 
     function goBack(targetId) {
+      // Exit slideshow mode if active
+      if (currentFlow) {
+        currentFlow.classList.remove('slideshow-mode');
+        const controls = currentFlow.parentElement.querySelector('.slide-controls');
+        if (controls) controls.remove();
+        const progress = currentFlow.parentElement.querySelector('.slide-progress');
+        if (progress) progress.remove();
+        const exit = currentFlow.parentElement.querySelector('.slide-exit');
+        if (exit) exit.remove();
+        currentFlow.querySelectorAll('.guide-step').forEach(s => s.classList.remove('slide-active'));
+        currentFlow = null;
+      }
       show(targetId);
+    }
+
+    function initSlideshow(flow) {
+      currentFlow = flow;
+      currentSlide = 0;
+      flow.classList.add('slideshow-mode');
+
+      const steps = flow.querySelectorAll('.guide-step');
+      const total = steps.length;
+
+      // Remove old controls if any
+      const oldControls = flow.parentElement.querySelector('.slide-controls');
+      if (oldControls) oldControls.remove();
+      const oldProgress = flow.parentElement.querySelector('.slide-progress');
+      if (oldProgress) oldProgress.remove();
+      const oldExit = flow.parentElement.querySelector('.slide-exit');
+      if (oldExit) oldExit.remove();
+
+      // Add progress bar before flow
+      const progressDiv = document.createElement('div');
+      progressDiv.className = 'slide-progress';
+      progressDiv.innerHTML = '<div class="slide-progress-bar" style="width:0%"></div>';
+      flow.before(progressDiv);
+
+      // Add controls before flow
+      const controls = document.createElement('div');
+      controls.className = 'slide-controls';
+      controls.innerHTML = `
+        <button class="slide-btn" onclick="slideNav(-1)" id="slide-prev">&#8592;</button>
+        <span class="slide-counter"><span id="slide-current">1</span> / ${total}</span>
+        <button class="slide-btn" onclick="slideNav(1)" id="slide-next">&#8594;</button>
+      `;
+      flow.before(controls);
+
+      // Add exit button after flow
+      const exitBtn = document.createElement('button');
+      exitBtn.className = 'slide-exit';
+      exitBtn.textContent = '✕ Exit slideshow';
+      exitBtn.onclick = () => goBack(flow.closest('.wizard-panel').querySelector('.wizard-back').getAttribute('onclick').match(/'([^']+)'/)[1]);
+      flow.after(exitBtn);
+
+      // Show first slide
+      updateSlide(steps, total);
+
+      // Keyboard navigation
+      document.onkeydown = (e) => {
+        if (!currentFlow) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); slideNav(1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); slideNav(-1); }
+        if (e.key === 'Escape') exitBtn.click();
+      };
+
+      // Swipe support
+      let touchStartX = 0;
+      flow.ontouchstart = (e) => { touchStartX = e.touches[0].clientX; };
+      flow.ontouchend = (e) => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) slideNav(diff > 0 ? 1 : -1);
+      };
+    }
+
+    function slideNav(dir) {
+      if (!currentFlow) return;
+      const steps = currentFlow.querySelectorAll('.guide-step');
+      const total = steps.length;
+      currentSlide = Math.max(0, Math.min(total - 1, currentSlide + dir));
+      updateSlide(steps, total);
+    }
+
+    function updateSlide(steps, total) {
+      steps.forEach(s => s.classList.remove('slide-active'));
+      steps[currentSlide].classList.add('slide-active');
+
+      document.getElementById('slide-current').textContent = currentSlide + 1;
+      document.getElementById('slide-prev').disabled = currentSlide === 0;
+
+      const nextBtn = document.getElementById('slide-next');
+      if (currentSlide === total - 1) {
+        nextBtn.innerHTML = '✓';
+        nextBtn.onclick = () => {
+          // Show completion message
+          steps[currentSlide].querySelector('.guide-step-body').innerHTML += '<div class="guide-step-tip" style="margin-top:1rem;text-align:center;font-size:1.1rem;">🎉 <strong>Guide complete!</strong> You\'re ready to trade.</div>';
+          nextBtn.disabled = true;
+        };
+      } else {
+        nextBtn.innerHTML = '→';
+        nextBtn.onclick = () => slideNav(1);
+        nextBtn.disabled = false;
+      }
+
+      // Update progress bar
+      const bar = currentFlow.parentElement.querySelector('.slide-progress-bar');
+      if (bar) bar.style.width = ((currentSlide + 1) / total * 100) + '%';
+
+      // Scroll to top of slide
+      currentFlow.closest('.wizard-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   </script>
 
