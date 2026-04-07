@@ -17,8 +17,8 @@
   --container-width: 1120px;
   --radius: 16px;
   --radius-sm: 10px;
-  --font-display: 'Uncial Antiqua', 'Syne', cursive;
-  --font-body: 'MedievalSharp', 'DM Sans', cursive;
+  --font-display: 'Cinzel Decorative', 'Cinzel', serif;
+  --font-body: 'Cinzel', serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
